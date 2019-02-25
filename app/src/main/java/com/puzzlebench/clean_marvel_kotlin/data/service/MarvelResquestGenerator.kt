@@ -7,8 +7,8 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 
 class MarvelResquestGenerator {
-    private val PRIVATE_API_KEY_ARG = "hash"
-    private val PUBLIC_API_KEY_ARG = "apikey"
+    private val PRIVATE_API_KEY_ARG = "781b588b41d61f9d53421f8373716826879645ff"
+    private val PUBLIC_API_KEY_ARG = "b9baa830257d91dacc32db89d34d1f09"
     private val TS = "ts"
     private val TS_VALUE = "1"
     private val httpClient = OkHttpClient.Builder().addInterceptor { chain ->

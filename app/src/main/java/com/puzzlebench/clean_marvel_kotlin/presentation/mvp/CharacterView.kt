@@ -3,17 +3,22 @@ package com.puzzlebench.clean_marvel_kotlin.presentation.mvp
 import android.support.v7.widget.GridLayoutManager
 import android.view.View
 import com.puzzlebench.clean_marvel_kotlin.R
+import com.puzzlebench.clean_marvel_kotlin.data.service.CharacterAditionalInfoServiceImpl
 import com.puzzlebench.clean_marvel_kotlin.domain.model.Character
+import com.puzzlebench.clean_marvel_kotlin.domain.usecase.GetCharacterAditionalInfoServiceUseCase
 import com.puzzlebench.clean_marvel_kotlin.presentation.MainActivity
 import com.puzzlebench.clean_marvel_kotlin.presentation.adapter.CharacterAdapter
 import com.puzzlebench.clean_marvel_kotlin.presentation.extension.showToast
 import kotlinx.android.synthetic.main.activity_main.*
 import java.lang.ref.WeakReference
 
-class CharecterView(activity: MainActivity) {
+class CharacterView(activity: MainActivity) {
+
     private val activityRef = WeakReference(activity)
     private val SPAN_COUNT = 1
-    var adapter = CharacterAdapter { character -> activity.applicationContext.showToast(character.id.toString()) }
+    var adapter = CharacterAdapter { character ->
+        activity.applicationContext.showToast(character.id.toString())
+    }
 
     fun init() {
         val activity = activityRef.get()

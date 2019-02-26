@@ -1,6 +1,6 @@
 package com.puzzlebench.clean_marvel_kotlin.data.service.api
 
-import com.puzzlebench.clean_marvel_kotlin.data.service.response.CharacterFullInfoResponse
+import com.puzzlebench.clean_marvel_kotlin.data.service.response.CharacterAditionalInfoResponse
 import com.puzzlebench.clean_marvel_kotlin.data.service.response.CharacterResponse
 import com.puzzlebench.clean_marvel_kotlin.data.service.response.DataBaseResponse
 import com.puzzlebench.clean_marvel_kotlin.data.service.response.MarvelBaseResponse
@@ -13,5 +13,5 @@ interface MarvelApi {
     fun getCharacter(): Call<MarvelBaseResponse<DataBaseResponse<ArrayList<CharacterResponse>>>>
 
     @GET("/v1/public/characters/{characterId}")
-    fun getChatacterById(id: Int): Call<MarvelBaseResponse<DataBaseResponse<ArrayList<CharacterFullInfoResponse>>>>
+    fun getChatacterById(id: Int): Call<MarvelBaseResponse<DataBaseResponse<ArrayList<CharacterAditionalInfoResponse>>>>
 }

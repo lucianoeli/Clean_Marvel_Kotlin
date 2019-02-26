@@ -1,6 +1,6 @@
 package com.puzzlebench.clean_marvel_kotlin.data.service.response
 
-class CharacterFullInfoResponse(
+class CharacterAditionalInfoResponse(
         //val character: Character,
         val comics: String,
         val series: String,

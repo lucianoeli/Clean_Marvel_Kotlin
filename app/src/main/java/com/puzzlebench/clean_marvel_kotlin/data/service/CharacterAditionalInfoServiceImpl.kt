@@ -1,15 +1,15 @@
 package com.puzzlebench.clean_marvel_kotlin.data.service
 
 import android.util.Log
-import com.puzzlebench.clean_marvel_kotlin.data.mapper.CharacterFullInfoMapperService
+import com.puzzlebench.clean_marvel_kotlin.data.mapper.CharacterAditionalInfoMapperService
 
 import com.puzzlebench.clean_marvel_kotlin.data.service.api.MarvelApi
-import com.puzzlebench.clean_marvel_kotlin.domain.model.CharacterFullInfo
+import com.puzzlebench.clean_marvel_kotlin.domain.model.CharacterAditionalInfo
 import io.reactivex.Observable
 
-class CharacterFullInfoServiceImpl(private val api: MarvelResquestGenerator = MarvelResquestGenerator(), private val mapper: CharacterFullInfoMapperService = CharacterFullInfoMapperService(), private val id: Int){
+class CharacterAditionalInfoServiceImpl(private val api: MarvelResquestGenerator = MarvelResquestGenerator(), private val mapper: CharacterAditionalInfoMapperService = CharacterAditionalInfoMapperService(), private val id: Int){
 
-    fun getCharacterById(): Observable<CharacterFullInfo> {
+    fun getCharacterById(): Observable<CharacterAditionalInfo> {
         return Observable.create { subscriber ->
             val callResponse = api.createService(MarvelApi::class.java).getChatacterById(id)
             val response = callResponse.execute()

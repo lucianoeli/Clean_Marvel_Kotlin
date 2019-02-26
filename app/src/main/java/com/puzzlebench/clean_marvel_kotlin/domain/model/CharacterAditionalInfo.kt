@@ -1,6 +1,6 @@
 package com.puzzlebench.clean_marvel_kotlin.domain.model
 
-class CharacterFullInfo(
+class CharacterAditionalInfo(
         //val character: Character,
         val comicsUrl: String,
         val seriesUrl: String,

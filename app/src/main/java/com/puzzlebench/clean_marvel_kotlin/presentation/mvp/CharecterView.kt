@@ -13,7 +13,7 @@ import java.lang.ref.WeakReference
 class CharecterView(activity: MainActivity) {
     private val activityRef = WeakReference(activity)
     private val SPAN_COUNT = 1
-    var adapter = CharacterAdapter { character -> activity.applicationContext.showToast(character.name) }
+    var adapter = CharacterAdapter { character -> activity.applicationContext.showToast(character.id.toString()) }
 
     fun init() {
         val activity = activityRef.get()
@@ -22,7 +22,6 @@ class CharecterView(activity: MainActivity) {
             activity.recycleView.adapter = adapter
             showLoading()
         }
-
     }
 
     fun showToastNoItemToShow() {

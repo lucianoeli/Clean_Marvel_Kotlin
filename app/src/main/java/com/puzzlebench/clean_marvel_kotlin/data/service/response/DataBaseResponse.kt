@@ -4,6 +4,7 @@ import com.google.gson.annotations.SerializedName
 
 class DataBaseResponse<T>(
         @SerializedName("results") val characters: List<CharacterResponse>,
+        @SerializedName("characterData") val characterData: CharacterFullInfoResponse,
         val offset: Int,
         val limit: Int,
         val total: Int

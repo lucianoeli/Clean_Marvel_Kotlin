@@ -1,5 +1,6 @@
 package com.puzzlebench.clean_marvel_kotlin.data.service
 
+import android.util.Log
 import com.puzzlebench.clean_marvel_kotlin.data.mapper.CharacterMapperService
 import com.puzzlebench.clean_marvel_kotlin.data.service.api.MarvelApi
 import com.puzzlebench.clean_marvel_kotlin.domain.model.Character
@@ -13,7 +14,6 @@ class CharacterServicesImpl(private val api: MarvelResquestGenerator = MarvelRes
         return Observable.create { subscriber ->
             val callResponse = api.createService(MarvelApi::class.java).getCharacter()
             val response = callResponse.execute()
-
             if (response.isSuccessful) {
                 subscriber.onNext(mapper.transform(response.body()!!.data!!.characters))
                 subscriber.onComplete()

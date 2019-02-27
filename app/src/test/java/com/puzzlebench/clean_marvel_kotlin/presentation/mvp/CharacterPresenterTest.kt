@@ -4,6 +4,8 @@ import com.puzzlebench.clean_marvel_kotlin.data.service.CharacterServicesImpl
 import com.puzzlebench.clean_marvel_kotlin.domain.model.Character
 import com.puzzlebench.clean_marvel_kotlin.domain.usecase.GetCharacterServiceUseCase
 import com.puzzlebench.clean_marvel_kotlin.mocks.factory.CharactersFactory
+import com.puzzlebench.clean_marvel_kotlin.presentation.mvp.presenter.CharacterPresenter
+import com.puzzlebench.clean_marvel_kotlin.presentation.mvp.view.CharacterView
 import io.reactivex.Observable
 import io.reactivex.android.plugins.RxAndroidPlugins
 import io.reactivex.disposables.CompositeDisposable

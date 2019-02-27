@@ -1,8 +1,9 @@
-package com.puzzlebench.clean_marvel_kotlin.presentation.mvp
+package com.puzzlebench.clean_marvel_kotlin.presentation.mvp.presenter
 
 import com.puzzlebench.clean_marvel_kotlin.domain.usecase.GetCharacterAditionalInfoServiceUseCase
 import com.puzzlebench.clean_marvel_kotlin.domain.usecase.GetCharacterServiceUseCase
 import com.puzzlebench.clean_marvel_kotlin.presentation.base.Presenter
+import com.puzzlebench.clean_marvel_kotlin.presentation.mvp.view.CharacterView
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers

@@ -6,8 +6,8 @@ import com.puzzlebench.clean_marvel_kotlin.data.service.CharacterServicesImpl
 import com.puzzlebench.clean_marvel_kotlin.domain.usecase.GetCharacterAditionalInfoServiceUseCase
 import com.puzzlebench.clean_marvel_kotlin.domain.usecase.GetCharacterServiceUseCase
 import com.puzzlebench.clean_marvel_kotlin.presentation.base.BaseRxActivity
-import com.puzzlebench.clean_marvel_kotlin.presentation.mvp.CharacterPresenter
-import com.puzzlebench.clean_marvel_kotlin.presentation.mvp.CharacterView
+import com.puzzlebench.clean_marvel_kotlin.presentation.mvp.presenter.CharacterPresenter
+import com.puzzlebench.clean_marvel_kotlin.presentation.mvp.view.CharacterView
 
 open class MainActivity : BaseRxActivity() {
 

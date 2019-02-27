@@ -5,11 +5,11 @@ import com.puzzlebench.clean_marvel_kotlin.domain.model.CharacterAditionalInfo
 
 open class CharacterAditionalInfoMapperService: BaseMapperRepository<CharacterAditionalInfoResponse, CharacterAditionalInfo>{
 
-    override fun transform(characterFiResponse: CharacterAditionalInfoResponse): CharacterAditionalInfo = CharacterAditionalInfo(
-            characterFiResponse.comics,
-            characterFiResponse.series,
-            characterFiResponse.stories,
-            characterFiResponse.events
+    override fun transform(characterAI: CharacterAditionalInfoResponse): CharacterAditionalInfo = CharacterAditionalInfo(
+            characterAI.comics,
+            characterAI.series,
+            characterAI.stories,
+            characterAI.events
     )
 
     override fun transformToResponse(type: CharacterAditionalInfo): CharacterAditionalInfoResponse {

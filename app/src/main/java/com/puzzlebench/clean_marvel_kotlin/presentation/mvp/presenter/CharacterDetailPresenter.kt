@@ -27,12 +27,9 @@ class CharacterDetailPresenter(
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe({ character ->
                     if (character == null) {
-                        //view.showToastNoDetailToShow()
                         view.showToastNoDetailToShow()
-                        Log.d("RCI","if")
                     } else {
-                        view.showCharacterDetail(character[0])
-                        Log.d("RCI",character.toString())
+                        view.showCharacterDetail(character)
                     }
                 }, { e ->
                     view.showToastNetworkError(e.message.toString())

@@ -40,11 +40,11 @@ class CharacterView(activity: MainActivity) {
     }
 
     fun showToastNetworkError(error: String) {
-        activityRef.get()!!.applicationContext.showToast(error)
+        activityRef.get()?.applicationContext?.showToast(error)
     }
 
     fun hideLoading() {
-        activityRef.get()!!.progressBar.visibility = View.GONE
+        activityRef.get()?.progressBar?.visibility = View.GONE
     }
 
     fun showCharacters(characters: List<Character>) {
@@ -52,7 +52,7 @@ class CharacterView(activity: MainActivity) {
     }
 
     fun showLoading() {
-        activityRef.get()!!.progressBar.visibility = View.VISIBLE
+        activityRef.get()?.progressBar?.visibility = View.VISIBLE
     }
 
 }

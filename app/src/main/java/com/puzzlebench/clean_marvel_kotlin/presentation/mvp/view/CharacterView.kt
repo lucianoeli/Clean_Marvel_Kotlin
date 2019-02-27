@@ -16,9 +16,6 @@ class CharacterView(activity: MainActivity) {
     private val activityRef = WeakReference(activity)
     private val SPAN_COUNT = 1
     var adapter = CharacterAdapter { character ->
-        activity.applicationContext.showToast(character.id.toString())
-        //TODO fragment here
-
         val fragment = CharacterDetailFragment.newInstance(character.id)
         fragment.show(activity.supportFragmentManager, "CharacterDetailDialog")
 

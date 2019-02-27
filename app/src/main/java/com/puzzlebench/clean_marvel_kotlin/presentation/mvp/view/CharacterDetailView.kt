@@ -40,9 +40,6 @@ class CharacterDetailView(fragment: CharacterDetailFragment) {
             fragment.name.text = character.name
 
             val imageUrl = character.thumbnail.path + "." + character.thumbnail.extension
-            Log.d("MY MSG", character.thumbnail.path + "." + character.thumbnail.extension)
-
-
             Picasso
                     .with(fragment.context)
                     .load(imageUrl)

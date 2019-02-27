@@ -11,6 +11,9 @@ import com.puzzlebench.clean_marvel_kotlin.presentation.base.BaseRxDialogFragmen
 import com.puzzlebench.clean_marvel_kotlin.presentation.mvp.presenter.CharacterDetailPresenter
 import com.puzzlebench.clean_marvel_kotlin.presentation.mvp.view.CharacterDetailView
 
+
+
+
 private const val ARG_CHARACTER_ID = "characterId"
 
 class CharacterDetailFragment : BaseRxDialogFragment() {
@@ -26,6 +29,13 @@ class CharacterDetailFragment : BaseRxDialogFragment() {
 
     override fun onStart() {
         super.onStart()
+
+        dialog.let {
+            val width = ViewGroup.LayoutParams.MATCH_PARENT
+            val height = ViewGroup.LayoutParams.MATCH_PARENT
+            dialog.window.setLayout(width, height)
+        }
+
         val getCharacterAditionalInfoServiceUseCase = GetCharacterAditionalInfoServiceUseCase(CharacterServicesImpl())
         val presenter = CharacterDetailPresenter(
                 CharacterDetailView(this),

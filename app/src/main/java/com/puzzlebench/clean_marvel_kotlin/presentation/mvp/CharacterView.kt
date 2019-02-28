@@ -10,10 +10,10 @@ import com.puzzlebench.clean_marvel_kotlin.presentation.extension.showToast
 import kotlinx.android.synthetic.main.activity_main.*
 import java.lang.ref.WeakReference
 
-class CharecterView(activity: MainActivity) {
+class CharacterView(activity: MainActivity) {
     private val activityRef = WeakReference(activity)
     private val SPAN_COUNT = 1
-    var adapter = CharacterAdapter { character -> activity.applicationContext.showToast(character.name) }
+    var adapter = CharacterAdapter { character -> character.name?.let { activity.applicationContext.showToast(it) } }
 
     fun init() {
         val activity = activityRef.get()
@@ -48,6 +48,10 @@ class CharecterView(activity: MainActivity) {
 
     fun showLoading() {
         activityRef.get()!!.progressBar.visibility = View.VISIBLE
+    }
+
+    fun storeDataInRealm(listener: View.OnClickListener){
+        activityRef.get()?.refreshFloatingButton?.setOnClickListener(listener)
 
     }
 }

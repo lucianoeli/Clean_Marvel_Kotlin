@@ -1,16 +1,22 @@
 package com.puzzlebench.clean_marvel_kotlin.presentation.mvp
 
+import android.view.View
 import com.puzzlebench.clean_marvel_kotlin.domain.usecase.GetCharacterServiceUseCase
 import com.puzzlebench.clean_marvel_kotlin.presentation.base.Presenter
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
 
-class CharacterPresenter(view: CharecterView, private val getChatacterServiceUseCase: GetCharacterServiceUseCase, val subscriptions: CompositeDisposable) : Presenter<CharecterView>(view) {
+class CharacterPresenter(
+        view: CharacterView,
+        private val getChatacterServiceUseCase: GetCharacterServiceUseCase,
+        val subscriptions: CompositeDisposable
+) : Presenter<CharacterView>(view) {
 
     fun init() {
         view.init()
-        requestGetCharacters()
+        //requestGetCharacters()
+        view.storeDataInRealm(View.OnClickListener { requestGetCharacters() })
     }
 
     private fun requestGetCharacters() {

@@ -1,6 +1,5 @@
 package com.puzzlebench.clean_marvel_kotlin.presentation
 
-import android.content.Context
 import android.os.Bundle
 import com.puzzlebench.clean_marvel_kotlin.R
 import com.puzzlebench.clean_marvel_kotlin.data.service.CharacterServicesImpl

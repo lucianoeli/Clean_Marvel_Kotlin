@@ -24,16 +24,16 @@ open class CharacterMapperService : BaseMapperRepository<CharacterResponse, Char
             transformToThumbnailResponse(type.thumbnail)
     )
 
-    fun transformToThumbnail(thumbnailResponse: ThumbnailResponse?): Thumbnail
+    fun transformToThumbnail(thumbnailResponse: ThumbnailResponse): Thumbnail
             = Thumbnail(
-            thumbnailResponse?.path,
-            thumbnailResponse?.extension
+            thumbnailResponse.path,
+            thumbnailResponse.extension
     )
 
-    fun transformToThumbnailResponse(thumbnail: Thumbnail?): ThumbnailResponse
+    fun transformToThumbnailResponse(thumbnail: Thumbnail): ThumbnailResponse
             = ThumbnailResponse(
-            thumbnail?.path,
-            thumbnail?.extension
+            thumbnail.path,
+            thumbnail.extension
     )
 
     fun transform(charactersResponse: List<CharacterResponse>): List<Character>

@@ -15,7 +15,6 @@ class CharacterPresenter(
 
     fun init() {
         view.init()
-        //requestGetCharacters()
         view.getCharacters(View.OnClickListener { requestGetCharacters() })
     }
 

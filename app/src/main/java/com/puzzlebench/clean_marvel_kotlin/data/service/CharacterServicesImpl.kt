@@ -3,6 +3,7 @@ package com.puzzlebench.clean_marvel_kotlin.data.service
 import android.util.Log
 import com.puzzlebench.clean_marvel_kotlin.data.mapper.CharacterMapperService
 import com.puzzlebench.clean_marvel_kotlin.data.service.api.MarvelApi
+import com.puzzlebench.clean_marvel_kotlin.data.service.response.CharacterResponse
 import com.puzzlebench.clean_marvel_kotlin.domain.model.Character
 import io.reactivex.Observable
 
@@ -17,7 +18,8 @@ class CharacterServicesImpl(
             val callResponse = api.createService(MarvelApi::class.java).getCharacter()
             val response = callResponse.execute()
             if (response.isSuccessful) {
-                subscriber.onNext(mapper.transform(response.body()!!.data!!.characters))
+                subscriber.onNext(mapper.transform(response.body()?.data?.characters?: emptyList()))
+                //subscriber.onNext(mapper.transform( emptyList()))
                 subscriber.onComplete()
             } else {
                 subscriber.onError(Throwable(response.message()))
@@ -25,12 +27,17 @@ class CharacterServicesImpl(
         }
     }
 
-    fun getCharacterById(id: Int): Observable<Character> {
+    fun getCharacterById(id: Int): Observable<List<Character>> {
         return Observable.create { subscriber ->
             val callResponse = api.createService(MarvelApi::class.java).getChatacterById(id)
             val response = callResponse.execute()
             if (response.isSuccessful) {
-                subscriber.onNext(mapper.transform(response.body()!!.data!!.characters[0]))
+                /*
+                response.body()?.data?.characters?.get(0)let {
+                    subscriber.onNext(mapper.transform(it))
+                }
+                */
+                subscriber.onNext(mapper.transform(response.body()?.data?.characters?: emptyList()))
                 subscriber.onComplete()
             } else {
                 subscriber.onError(Throwable(response.message()))

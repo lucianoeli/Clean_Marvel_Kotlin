@@ -6,5 +6,5 @@ import com.puzzlebench.clean_marvel_kotlin.domain.model.CharacterAditionalInfo
 import io.reactivex.Observable
 
 open class GetCharacterAditionalInfoServiceUseCase(private val characterServicesImpl: CharacterServicesImpl) {
-    open operator fun invoke(id: Int): Observable<Character> = characterServicesImpl.getCharacterById(id)
+    open operator fun invoke(id: Int): Observable<List<Character>> = characterServicesImpl.getCharacterById(id)
 }

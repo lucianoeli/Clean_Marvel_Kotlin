@@ -16,10 +16,11 @@ class CharacterPresenter(
     fun init() {
         view.init()
         //requestGetCharacters()
-        view.storeDataInRealm(View.OnClickListener { requestGetCharacters() })
+        view.getCharacters(View.OnClickListener { requestGetCharacters() })
     }
 
     private fun requestGetCharacters() {
+        view.showLoading()
         val subscription = getChatacterServiceUseCase.invoke().subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe({ characters ->
             if (characters.isEmpty()) {
                 view.showToastNoItemToShow()

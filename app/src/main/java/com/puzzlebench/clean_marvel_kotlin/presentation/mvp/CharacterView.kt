@@ -20,7 +20,7 @@ class CharacterView(activity: MainActivity) {
         if (activity != null) {
             activity.recycleView.layoutManager = GridLayoutManager(activity, SPAN_COUNT)
             activity.recycleView.adapter = adapter
-            showLoading()
+            hideLoading()
         }
 
     }
@@ -50,8 +50,7 @@ class CharacterView(activity: MainActivity) {
         activityRef.get()!!.progressBar.visibility = View.VISIBLE
     }
 
-    fun storeDataInRealm(listener: View.OnClickListener){
+    fun getCharacters(listener: View.OnClickListener){
         activityRef.get()?.refreshFloatingButton?.setOnClickListener(listener)
-
     }
 }

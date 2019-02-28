@@ -1,6 +1,7 @@
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
+apply plugin: 'realm-android'
 
 android {
     compileSdkVersion 26
@@ -52,7 +53,6 @@ dependencies {
     testCompile "org.mockito:mockito-core:2.10.0"
     testImplementation 'junit:junit:4.12'
 
-
 }
 
 android.testOptions.unitTests.all {
@@ -65,4 +65,5 @@ android.testOptions.unitTests.all {
 }
 repositories {
     mavenCentral()
+
 }

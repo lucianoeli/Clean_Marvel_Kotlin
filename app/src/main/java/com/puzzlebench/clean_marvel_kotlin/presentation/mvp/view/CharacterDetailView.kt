@@ -1,14 +1,13 @@
 package com.puzzlebench.clean_marvel_kotlin.presentation.mvp.view
 
-import android.util.Log
+import android.view.View
 import com.puzzlebench.clean_marvel_kotlin.R
 import com.puzzlebench.clean_marvel_kotlin.domain.model.Character
-import com.puzzlebench.clean_marvel_kotlin.domain.model.CharacterAditionalInfo
 import com.puzzlebench.clean_marvel_kotlin.presentation.extension.showToast
 import com.puzzlebench.clean_marvel_kotlin.presentation.mvp.fragment.CharacterDetailFragment
 import com.squareup.picasso.Picasso
+import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.character_detail.*
-import kotlinx.android.synthetic.main.character_detail.view.*
 import java.lang.ref.WeakReference
 
 class CharacterDetailView(fragment: CharacterDetailFragment) {
@@ -17,7 +16,7 @@ class CharacterDetailView(fragment: CharacterDetailFragment) {
     fun init() {
         val fragment = fragmentRef.get()
         if (fragment != null) {
-            //TODO loadiing
+           showLoading()
         }
     }
 
@@ -44,8 +43,14 @@ class CharacterDetailView(fragment: CharacterDetailFragment) {
                     .with(fragment.context)
                     .load(imageUrl)
                     .into(fragment.imageView)
-
         }
+    }
 
+    fun showLoading() {
+        fragmentRef.get()?.progressBarDetailCard?.visibility = View.VISIBLE
+    }
+
+    fun hideLoading() {
+        fragmentRef.get()?.progressBarDetailCard?.visibility = View.GONE
     }
 }

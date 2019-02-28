@@ -19,7 +19,6 @@ class CharacterServicesImpl(
             val response = callResponse.execute()
             if (response.isSuccessful) {
                 subscriber.onNext(mapper.transform(response.body()?.data?.characters?: emptyList()))
-                //subscriber.onNext(mapper.transform( emptyList()))
                 subscriber.onComplete()
             } else {
                 subscriber.onError(Throwable(response.message()))
@@ -32,11 +31,6 @@ class CharacterServicesImpl(
             val callResponse = api.createService(MarvelApi::class.java).getChatacterById(id)
             val response = callResponse.execute()
             if (response.isSuccessful) {
-                /*
-                response.body()?.data?.characters?.get(0)let {
-                    subscriber.onNext(mapper.transform(it))
-                }
-                */
                 subscriber.onNext(mapper.transform(response.body()?.data?.characters?: emptyList()))
                 subscriber.onComplete()
             } else {

@@ -6,7 +6,6 @@ import com.puzzlebench.clean_marvel_kotlin.domain.model.Character
 import com.puzzlebench.clean_marvel_kotlin.presentation.extension.showToast
 import com.puzzlebench.clean_marvel_kotlin.presentation.mvp.fragment.CharacterDetailFragment
 import com.squareup.picasso.Picasso
-import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.character_detail.*
 import java.lang.ref.WeakReference
 
@@ -15,14 +14,12 @@ class CharacterDetailView(fragment: CharacterDetailFragment) {
 
     fun init() {
         val fragment = fragmentRef.get()
-        if (fragment != null) {
-           showLoading()
-        }
+        fragment?: showLoading()
     }
 
     fun showToastNoDetailToShow() {
         val fragment = fragmentRef.get()
-        if (fragment != null) {
+        fragment?.let{
             val message = fragment.activity.baseContext.resources.getString(R.string.no_description_available)
             fragment.activity.applicationContext.showToast(message)
         }
@@ -34,15 +31,15 @@ class CharacterDetailView(fragment: CharacterDetailFragment) {
 
     fun showCharacterDetail(character: Character) {
         val fragment = fragmentRef.get()
-        if (fragment != null) {
-            fragment.description.text = character.description
-            fragment.name.text = character.name
+        fragment.let{
+            fragment?.description?.text = character.description
+            fragment?.name?.text = character.name
 
-            val imageUrl = character.thumbnail.path + "." + character.thumbnail.extension
+            val imageUrl = "${character.thumbnail.path}.${character.thumbnail.extension}"
             Picasso
-                    .with(fragment.context)
+                    .with(fragment?.context)
                     .load(imageUrl)
-                    .into(fragment.imageView)
+                    .into(fragment?.imageView)
         }
     }
 

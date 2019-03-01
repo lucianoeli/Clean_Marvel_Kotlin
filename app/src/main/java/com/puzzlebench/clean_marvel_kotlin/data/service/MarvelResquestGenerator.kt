@@ -5,7 +5,6 @@ import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
-
 class MarvelResquestGenerator {
     private val PRIVATE_API_KEY_ARG = "hash"
     private val PUBLIC_API_KEY_ARG = "apikey"

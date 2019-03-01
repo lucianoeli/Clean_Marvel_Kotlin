@@ -11,9 +11,6 @@ import com.puzzlebench.clean_marvel_kotlin.presentation.base.BaseRxDialogFragmen
 import com.puzzlebench.clean_marvel_kotlin.presentation.mvp.presenter.CharacterDetailPresenter
 import com.puzzlebench.clean_marvel_kotlin.presentation.mvp.view.CharacterDetailView
 
-
-
-
 private const val ARG_CHARACTER_ID = "characterId"
 
 class CharacterDetailFragment : BaseRxDialogFragment() {

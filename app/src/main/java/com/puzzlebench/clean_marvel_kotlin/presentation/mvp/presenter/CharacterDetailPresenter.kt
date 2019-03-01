@@ -6,6 +6,7 @@ import com.puzzlebench.clean_marvel_kotlin.presentation.mvp.view.CharacterDetail
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
+
 const val ZERO = 0
 class CharacterDetailPresenter(
         view: CharacterDetailView,

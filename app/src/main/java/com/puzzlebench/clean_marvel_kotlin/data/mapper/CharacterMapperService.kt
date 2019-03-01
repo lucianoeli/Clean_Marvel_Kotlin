@@ -5,7 +5,6 @@ import com.puzzlebench.clean_marvel_kotlin.data.service.response.ThumbnailRespon
 import com.puzzlebench.clean_marvel_kotlin.domain.model.Character
 import com.puzzlebench.clean_marvel_kotlin.domain.model.Thumbnail
 
-
 open class CharacterMapperService : BaseMapperRepository<CharacterResponse, Character> {
 
     override fun transform(characterResponse: CharacterResponse): Character

@@ -11,4 +11,6 @@
     <dimen name="name_margin">20dp</dimen>
     <dimen name="textview_character_description_start_end_margin">10dp</dimen>
     <dimen name="textview_character_description_bottom_margin">18dp</dimen>
+    <dimen name="textView_name_marginTop">20dp</dimen>
+    <dimen name="progressBar_merginTop">74dp</dimen>
 </resources>

@@ -7,12 +7,11 @@ import com.puzzlebench.clean_marvel_kotlin.domain.model.Character
 import com.puzzlebench.clean_marvel_kotlin.presentation.MainActivity
 import com.puzzlebench.clean_marvel_kotlin.presentation.adapter.CharacterAdapter
 import com.puzzlebench.clean_marvel_kotlin.presentation.extension.showToast
-import io.realm.Realm
 import kotlinx.android.synthetic.main.activity_main.*
 import java.lang.ref.WeakReference
 
 class CharacterView(activity: MainActivity) {
-    private val activityRef = WeakReference(activity)
+    val activityRef = WeakReference(activity)
     private val SPAN_COUNT = 1
     var adapter = CharacterAdapter { character -> character.name?.let { activity.applicationContext.showToast(it) } }
 

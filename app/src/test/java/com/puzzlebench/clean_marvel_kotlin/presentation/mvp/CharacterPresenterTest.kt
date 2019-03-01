@@ -45,7 +45,7 @@ class CharacterPresenterTest {
         Mockito.`when`(getCharacterServiceUseCase.invoke()).thenReturn(Observable.error(Exception("")))
         characterPresenter.init()
         verify(view).init()
-        verify(characterServiceImp).getCaracters()
+        verify(characterServiceImp).getCharacters()
         verify(view).hideLoading()
         verify(view).showToastNetworkError("")
 
@@ -58,7 +58,7 @@ class CharacterPresenterTest {
         Mockito.`when`(getCharacterServiceUseCase.invoke()).thenReturn(observable)
         characterPresenter.init()
         verify(view).init()
-        verify(characterServiceImp).getCaracters()
+        verify(characterServiceImp).getCharacters()
         verify(view).hideLoading()
         verify(view).showCharacters(itemsCharecters)
 
@@ -72,7 +72,7 @@ class CharacterPresenterTest {
         Mockito.`when`(getCharacterServiceUseCase.invoke()).thenReturn(observable)
         characterPresenter.init()
         verify(view).init()
-        verify(characterServiceImp).getCaracters()
+        verify(characterServiceImp).getCharacters()
 
 
     }

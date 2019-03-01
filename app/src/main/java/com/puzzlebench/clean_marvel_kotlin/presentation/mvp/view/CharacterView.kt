@@ -35,7 +35,6 @@ class CharacterView(activity: MainActivity) {
         if (activity != null) {
             val message = activity.baseContext.resources.getString(R.string.message_no_items_to_show)
             activity.applicationContext.showToast(message)
-
         }
     }
 

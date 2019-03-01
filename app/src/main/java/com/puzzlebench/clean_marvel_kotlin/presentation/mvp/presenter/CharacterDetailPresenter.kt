@@ -1,5 +1,6 @@
 package com.puzzlebench.clean_marvel_kotlin.presentation.mvp.presenter
 
+import android.util.Log
 import com.puzzlebench.clean_marvel_kotlin.domain.usecase.GetCharacterAditionalInfoServiceUseCase
 import com.puzzlebench.clean_marvel_kotlin.presentation.base.Presenter
 import com.puzzlebench.clean_marvel_kotlin.presentation.mvp.view.CharacterDetailView
@@ -10,7 +11,7 @@ import io.reactivex.schedulers.Schedulers
 const val ZERO = 0
 class CharacterDetailPresenter(
         view: CharacterDetailView,
-        private val getCharacterAditionalInfoServiceUseCase: GetCharacterAditionalInfoServiceUseCase,
+        private val getCharacterAdditionalInfoServiceUseCase: GetCharacterAditionalInfoServiceUseCase,
         val subscriptions: CompositeDisposable,
         val characterId: Int
 ) : Presenter<CharacterDetailView>(view) {
@@ -21,7 +22,7 @@ class CharacterDetailPresenter(
     }
 
     private fun requestCharacterInfo(characterId: Int) {
-        val subscription = getCharacterAditionalInfoServiceUseCase
+        val subscription = getCharacterAdditionalInfoServiceUseCase
                 .invoke(characterId)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -29,8 +30,9 @@ class CharacterDetailPresenter(
                     if (character == null) {
                         view.showToastNoDetailToShow()
                     } else {
-                        view.showCharacterDetail(character.get(ZERO))
+                        view.showCharacterDetail(character)
                     }
+                    Log.d("CHARACTER",character.toString())
                     view.hideLoading()
                 }, { e ->
                     view.showToastNetworkError(e.message.toString())

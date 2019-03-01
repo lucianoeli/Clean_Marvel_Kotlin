@@ -5,7 +5,6 @@
     android:layout_height="wrap_content"
     tools:context=".presentation.MainActivity">
 
-
     <ProgressBar
         android:id="@+id/progressBar"
         style="?android:attr/progressBarStyle"

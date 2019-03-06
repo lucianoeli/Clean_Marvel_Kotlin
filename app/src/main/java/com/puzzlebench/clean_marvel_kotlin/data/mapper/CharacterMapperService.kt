@@ -11,38 +11,36 @@ open class CharacterMapperService : BaseMapperRepository<CharacterResponse, Char
             type.id,
             type.name,
             type.description,
-            transformToThumbnail(type.thumbnail),
+            type.thumbnail?.let { transformToThumbnail(it) },
             type.comics,
             type.series,
             type.stories,
             type.events
     )
 
-    override fun transformToRepository(type: Character): CharacterResponse
-            = CharacterResponse(
+    override fun transformToRepository(type: Character): CharacterResponse = CharacterResponse(
             type.id,
             type.name,
             type.description,
-            transformToThumbnailResponse(type.thumbnail),
+            type.thumbnail?.let { transformToThumbnailResponse(it) },
             type.comics,
             type.series,
             type.stories,
             type.events
     )
 
-    fun transformToThumbnail(thumbnailResponse: ThumbnailResponse?): Thumbnail
-            = Thumbnail(
-            thumbnailResponse?.path,
-            thumbnailResponse?.extension
+    fun transformToThumbnail(thumbnailResponse: ThumbnailResponse): Thumbnail = Thumbnail(
+            thumbnailResponse.id,
+            thumbnailResponse.path,
+            thumbnailResponse.extension
     )
 
-    fun transformToThumbnailResponse(thumbnail: Thumbnail?): ThumbnailResponse
-            = ThumbnailResponse(
-            thumbnail?.path,
-            thumbnail?.extension
+    fun transformToThumbnailResponse(thumbnail: Thumbnail): ThumbnailResponse = ThumbnailResponse(
+            thumbnail.id,
+            thumbnail.path,
+            thumbnail.extension
     )
 
-    fun transform(charactersResponse: List<CharacterResponse>): List<Character>
-            = charactersResponse.map { transform(it) }
+    fun transform(charactersResponse: List<CharacterResponse>): List<Character> = charactersResponse.map { transform(it) }
 
 }

@@ -19,73 +19,83 @@ class CharacterMapperLocal : BaseMapperRepository<CharacterRealm, Character> {
             type.id,
             type.name,
             type.description,
-            transformToThumbnail(type.thumbnail),
-            transformToComics(type.comics),
-            transformToSeries(type.series),
-            transformToStories(type.stories),
-            transformToEvents(type.events)
+            type.thumbnail?.let { transformToThumbnail(it) },
+            type.comics?.let { transformToComics(it) },
+            type.series?.let { transformToSeries(it) },
+            type.stories?.let { transformToStories(it) },
+            type.events?.let { transformToEvents(it) }
     )
 
     override fun transformToRepository(type: Character): CharacterRealm = CharacterRealm(
             type.id,
             type.name,
             type.description,
-            transformToThumbnailRealm(type.thumbnail),
-            transformToComicsRealm(type.comics),
-            transformToSeriesRealm(type.series),
-            transformToStorieslRealm(type.stories),
-            transformToEventsRealm(type.events)
+            type.thumbnail?.let { transformToThumbnailRealm(it) },
+            type.comics?.let { transformToComicsRealm(it) },
+            type.series?.let { transformToSeriesRealm(it) },
+            type.stories?.let { transformToStorieslRealm(it) },
+            type.events?.let { transformToEventsRealm(it) }
     )
 
-    fun transformToThumbnailRealm(thumbnail: Thumbnail?): ThumbnailRealm = ThumbnailRealm(
-            thumbnail?.path,
-            thumbnail?.extension
+    fun transformToThumbnailRealm(thumbnail: Thumbnail): ThumbnailRealm = ThumbnailRealm(
+            thumbnail.id,
+            thumbnail.path,
+            thumbnail.extension
     )
 
-    fun transformToStorieslRealm(stories: Stories?): StoriesRealm = StoriesRealm(
-            stories?.available,
-            stories?.collectionURI
+    fun transformToStorieslRealm(stories: Stories): StoriesRealm = StoriesRealm(
+            stories.id,
+            stories.available,
+            stories.collectionURI
     )
 
-    fun transformToComicsRealm(comics: Comics?): ComicsRealm = ComicsRealm(
-            comics?.available,
-            comics?.collectionURI
+    fun transformToComicsRealm(comics: Comics): ComicsRealm = ComicsRealm(
+            comics.id,
+            comics.available,
+            comics.collectionURI
     )
 
-    fun transformToEventsRealm(events: Events?): EventsRealm = EventsRealm(
-            events?.available,
-            events?.collectionURI
+    fun transformToEventsRealm(events: Events): EventsRealm = EventsRealm(
+            events.id,
+            events.available,
+            events.collectionURI
     )
 
-    fun transformToSeriesRealm(series: Series?): SeriesRealm = SeriesRealm(
-            series?.available,
-            series?.collectionURI
+    fun transformToSeriesRealm(series: Series): SeriesRealm = SeriesRealm(
+            series.id,
+            series.available,
+            series.collectionURI
     )
 
 
-    fun transformToThumbnail(thumbnailRealm: ThumbnailRealm?) = Thumbnail(
-            thumbnailRealm?.path,
-            thumbnailRealm?.extension
+    fun transformToThumbnail(thumbnailRealm: ThumbnailRealm) = Thumbnail(
+            thumbnailRealm.id,
+            thumbnailRealm.path,
+            thumbnailRealm.extension
     )
 
-    fun transformToSeries(seriesRealm: SeriesRealm?) = Series(
-            seriesRealm?.available,
-            seriesRealm?.collectionURI
+    fun transformToSeries(seriesRealm: SeriesRealm) = Series(
+            seriesRealm.id,
+            seriesRealm.available,
+            seriesRealm.collectionURI
     )
 
-    fun transformToStories(storiesRealm: StoriesRealm?) = Stories(
-            storiesRealm?.available,
-            storiesRealm?.collectionURI
+    fun transformToStories(storiesRealm: StoriesRealm) = Stories(
+            storiesRealm.id,
+            storiesRealm.available,
+            storiesRealm.collectionURI
     )
 
-    fun transformToEvents(eventsRealm: EventsRealm?) = Events(
-            eventsRealm?.available,
-            eventsRealm?.collectionURI
+    fun transformToEvents(eventsRealm: EventsRealm) = Events(
+            eventsRealm.id,
+            eventsRealm.available,
+            eventsRealm.collectionURI
     )
 
-    fun transformToComics(comicsRealm: ComicsRealm?) = Comics(
-            comicsRealm?.available,
-            comicsRealm?.collectionURI
+    fun transformToComics(comicsRealm: ComicsRealm) = Comics(
+            comicsRealm.id,
+            comicsRealm.available,
+            comicsRealm.collectionURI
     )
 
     fun transformToRealmCharacterList(listCharacters: List<Character>) = listCharacters.map { transformToRepository(it) }

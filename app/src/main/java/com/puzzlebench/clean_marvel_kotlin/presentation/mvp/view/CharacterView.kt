@@ -1,28 +1,33 @@
-package com.puzzlebench.clean_marvel_kotlin.presentation.mvp
+package com.puzzlebench.clean_marvel_kotlin.presentation.mvp.view
 
 import android.support.v7.widget.GridLayoutManager
 import android.view.View
+import android.widget.Toast
 import com.puzzlebench.clean_marvel_kotlin.R
 import com.puzzlebench.clean_marvel_kotlin.domain.model.Character
 import com.puzzlebench.clean_marvel_kotlin.presentation.MainActivity
 import com.puzzlebench.clean_marvel_kotlin.presentation.adapter.CharacterAdapter
 import com.puzzlebench.clean_marvel_kotlin.presentation.extension.showToast
+import com.puzzlebench.clean_marvel_kotlin.presentation.mvp.fragment.CharacterDetailFragment
 import kotlinx.android.synthetic.main.activity_main.*
 import java.lang.ref.WeakReference
+import kotlin.coroutines.experimental.coroutineContext
 
 class CharacterView(activity: MainActivity) {
+
     val activityRef = WeakReference(activity)
     private val SPAN_COUNT = 1
-    var adapter = CharacterAdapter { character -> character.name?.let { activity.applicationContext.showToast(it) } }
+    var adapter = CharacterAdapter { character ->
+        val fragment = character?.id?.let { CharacterDetailFragment.newInstance(it) }
+        fragment?.show(activity.supportFragmentManager, "CharacterDetailDialog")
+    }
 
     fun init() {
         val activity = activityRef.get()
         if (activity != null) {
             activity.recycleView.layoutManager = GridLayoutManager(activity, SPAN_COUNT)
             activity.recycleView.adapter = adapter
-            hideLoading()
         }
-
     }
 
     fun showToastNoItemToShow() {
@@ -30,16 +35,15 @@ class CharacterView(activity: MainActivity) {
         if (activity != null) {
             val message = activity.baseContext.resources.getString(R.string.message_no_items_to_show)
             activity.applicationContext.showToast(message)
-
         }
     }
 
     fun showToastNetworkError(error: String) {
-        activityRef.get()!!.applicationContext.showToast(error)
+        activityRef.get()?.applicationContext?.showToast(error)
     }
 
     fun hideLoading() {
-        activityRef.get()!!.progressBar.visibility = View.GONE
+        activityRef.get()?.progressBar?.visibility = View.GONE
     }
 
     fun showCharacters(characters: List<Character>) {
@@ -47,10 +51,12 @@ class CharacterView(activity: MainActivity) {
     }
 
     fun showLoading() {
-        activityRef.get()!!.progressBar.visibility = View.VISIBLE
+        activityRef.get()?.progressBar?.visibility = View.VISIBLE
     }
 
     fun getCharacters(listener: View.OnClickListener){
         activityRef.get()?.refreshFloatingButton?.setOnClickListener(listener)
+        val message = "Data has been saved"
     }
+
 }

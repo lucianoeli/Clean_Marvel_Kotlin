@@ -11,5 +11,9 @@ open class CharacterRealm(
         var id: Int? = DEFAULT_ID,
         var name: String? = EMPTY_STRING,
         var description: String? = EMPTY_STRING,
-        var thumbnail: ThumbnailRealm? = ThumbnailRealm()
+        var thumbnail: ThumbnailRealm? = ThumbnailRealm(),
+        var comics: ComicsRealm? = ComicsRealm(),
+        var series: SeriesRealm? = SeriesRealm(),
+        var stories: StoriesRealm? = StoriesRealm(),
+        var events: EventsRealm? = EventsRealm()
 ) : RealmObject()

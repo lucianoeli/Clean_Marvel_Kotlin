@@ -5,15 +5,17 @@ import com.puzzlebench.clean_marvel_kotlin.data.service.response.ThumbnailRespon
 import com.puzzlebench.clean_marvel_kotlin.domain.model.Character
 import com.puzzlebench.clean_marvel_kotlin.domain.model.Thumbnail
 
-
 open class CharacterMapperService : BaseMapperRepository<CharacterResponse, Character> {
 
-    override fun transform(type: CharacterResponse): Character
-            = Character(
+    override fun transform(type: CharacterResponse): Character = Character(
             type.id,
             type.name,
             type.description,
-            transformToThumbnail(type.thumbnail)
+            transformToThumbnail(type.thumbnail),
+            type.comics,
+            type.series,
+            type.stories,
+            type.events
     )
 
     override fun transformToRepository(type: Character): CharacterResponse
@@ -21,7 +23,11 @@ open class CharacterMapperService : BaseMapperRepository<CharacterResponse, Char
             type.id,
             type.name,
             type.description,
-            transformToThumbnailResponse(type.thumbnail)
+            transformToThumbnailResponse(type.thumbnail),
+            type.comics,
+            type.series,
+            type.stories,
+            type.events
     )
 
     fun transformToThumbnail(thumbnailResponse: ThumbnailResponse): Thumbnail

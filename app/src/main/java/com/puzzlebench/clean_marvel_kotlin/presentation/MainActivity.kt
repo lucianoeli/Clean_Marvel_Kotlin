@@ -5,15 +5,14 @@ import com.puzzlebench.clean_marvel_kotlin.R
 import com.puzzlebench.clean_marvel_kotlin.data.local.GetCharactersLocalImpl
 import com.puzzlebench.clean_marvel_kotlin.data.local.SaveCharactersLocalImpl
 import com.puzzlebench.clean_marvel_kotlin.data.service.CharacterServicesImpl
-
 import com.puzzlebench.clean_marvel_kotlin.domain.usecase.GetCharacterLocalUseCase
 import com.puzzlebench.clean_marvel_kotlin.domain.usecase.GetCharacterServiceUseCase
 import com.puzzlebench.clean_marvel_kotlin.domain.usecase.SaveLocalCharactersUseCase
 import com.puzzlebench.clean_marvel_kotlin.presentation.base.BaseRxActivity
-import com.puzzlebench.clean_marvel_kotlin.presentation.mvp.CharacterPresenter
-import com.puzzlebench.clean_marvel_kotlin.presentation.mvp.CharacterView
+import com.puzzlebench.clean_marvel_kotlin.presentation.mvp.presenter.CharacterPresenter
 import io.realm.Realm
 import io.realm.RealmConfiguration
+import com.puzzlebench.clean_marvel_kotlin.presentation.mvp.view.CharacterView
 
 open class MainActivity : BaseRxActivity() {
 
@@ -34,7 +33,10 @@ open class MainActivity : BaseRxActivity() {
         setContentView(R.layout.activity_main)
 
         Realm.init(applicationContext)
-        val config = RealmConfiguration.Builder().name("realm.character").build()
+        val config = RealmConfiguration.Builder()
+                .name("realm.character")
+                .deleteRealmIfMigrationNeeded()
+                .build()
         realm = Realm.getInstance(config)
         presenter.init()
     }

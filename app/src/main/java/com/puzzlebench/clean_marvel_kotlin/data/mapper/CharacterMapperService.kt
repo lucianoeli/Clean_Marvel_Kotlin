@@ -30,10 +30,10 @@ open class CharacterMapperService : BaseMapperRepository<CharacterResponse, Char
             type.events
     )
 
-    fun transformToThumbnail(thumbnailResponse: ThumbnailResponse): Thumbnail
+    fun transformToThumbnail(thumbnailResponse: ThumbnailResponse?): Thumbnail
             = Thumbnail(
-            thumbnailResponse.path,
-            thumbnailResponse.extension
+            thumbnailResponse?.path,
+            thumbnailResponse?.extension
     )
 
     fun transformToThumbnailResponse(thumbnail: Thumbnail?): ThumbnailResponse

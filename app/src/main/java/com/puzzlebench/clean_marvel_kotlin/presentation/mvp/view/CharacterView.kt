@@ -11,15 +11,14 @@ import com.puzzlebench.clean_marvel_kotlin.presentation.extension.showToast
 import com.puzzlebench.clean_marvel_kotlin.presentation.mvp.fragment.CharacterDetailFragment
 import kotlinx.android.synthetic.main.activity_main.*
 import java.lang.ref.WeakReference
-import kotlin.coroutines.experimental.coroutineContext
 
 class CharacterView(activity: MainActivity) {
 
     val activityRef = WeakReference(activity)
     private val SPAN_COUNT = 1
     var adapter = CharacterAdapter { character ->
-        val fragment = character?.id?.let { CharacterDetailFragment.newInstance(it) }
-        fragment?.show(activity.supportFragmentManager, "CharacterDetailDialog")
+        val fragment = character.id.let { CharacterDetailFragment.newInstance(it) }
+        fragment.show(activity.supportFragmentManager, "CharacterDetailDialog")
     }
 
     fun init() {
@@ -56,7 +55,6 @@ class CharacterView(activity: MainActivity) {
 
     fun getCharacters(listener: View.OnClickListener){
         activityRef.get()?.refreshFloatingButton?.setOnClickListener(listener)
-        val message = "Data has been saved"
     }
 
 }

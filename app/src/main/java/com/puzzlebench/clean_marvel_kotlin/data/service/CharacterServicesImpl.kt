@@ -5,6 +5,7 @@ import com.puzzlebench.clean_marvel_kotlin.data.service.api.MarvelApi
 import com.puzzlebench.clean_marvel_kotlin.domain.model.Character
 import com.puzzlebench.clean_marvel_kotlin.presentation.mvp.presenter.ZERO
 import io.reactivex.Observable
+import io.reactivex.Observable.create
 
 class CharacterServicesImpl(
         private val api: MarvelResquestGenerator = MarvelResquestGenerator(),
@@ -12,7 +13,7 @@ class CharacterServicesImpl(
 )
 {
     fun getCharacters(): Observable<List<Character>> {
-        return Observable.create { subscriber ->
+        return create { subscriber ->
             val callResponse = api.createService(MarvelApi::class.java).getCharacter()
             val response = callResponse.execute()
             if (response.isSuccessful) {
@@ -25,7 +26,7 @@ class CharacterServicesImpl(
     }
 
     fun getCharacterById(id: Int): Observable<com.puzzlebench.clean_marvel_kotlin.domain.model.Character> {
-        return Observable.create { subscriber ->
+        return create { subscriber ->
             val callResponse = api.createService(MarvelApi::class.java).getCharacterById(id)
             val response = callResponse.execute()
             if (response.isSuccessful) {

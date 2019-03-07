@@ -13,4 +13,6 @@
     <dimen name="textview_character_description_bottom_margin">18dp</dimen>
     <dimen name="textView_name_marginTop">20dp</dimen>
     <dimen name="progressBar_merginTop">74dp</dimen>
+    <dimen name="floatActionButton_width">74dp</dimen>
+    <dimen name="floatActionButton_height">70dp</dimen>
 </resources>

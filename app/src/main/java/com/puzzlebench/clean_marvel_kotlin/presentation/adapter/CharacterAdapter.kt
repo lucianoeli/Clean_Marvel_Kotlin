@@ -14,7 +14,7 @@ class CharacterAdapter(
         val listener: CharacterListener
 ) : RecyclerView.Adapter<CharactersAdapterViewHolder>() {
 
-    var data by Delegates.observable(data) { prop, old, new -> notifyDataSetChanged() }
+    var data by Delegates.observable(data) { _, _, _-> notifyDataSetChanged() }
 
     override fun onCreateViewHolder(
             parent: ViewGroup,

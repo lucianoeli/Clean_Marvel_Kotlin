@@ -1,6 +1,8 @@
 package com.puzzlebench.clean_marvel_kotlin.domain.model
 
-class Thumbnail(
-        var path: String,
-        var extension: String
+open class Thumbnail(
+        val id: Int,
+        val path: String?,
+        val extension: String?
 )
+

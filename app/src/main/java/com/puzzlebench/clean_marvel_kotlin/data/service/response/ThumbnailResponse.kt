@@ -1,6 +1,7 @@
 package com.puzzlebench.clean_marvel_kotlin.data.service.response
 
 class ThumbnailResponse(
-        var path: String,
-        var extension: String
+        var id: Int,
+        var path: String?,
+        var extension: String?
 )

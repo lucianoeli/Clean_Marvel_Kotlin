@@ -35,7 +35,7 @@ class CharacterDetailView(fragment: CharacterDetailFragment) {
             fragment?.description?.text = character.description
             fragment?.name?.text = character.name
 
-            val imageUrl = "${character.thumbnail.path}.${character.thumbnail.extension}"
+            val imageUrl = "${character.thumbnail?.path}.${character.thumbnail?.extension}"
             Picasso
                     .with(fragment?.context)
                     .load(imageUrl)

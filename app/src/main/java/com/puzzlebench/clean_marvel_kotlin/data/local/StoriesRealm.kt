@@ -6,7 +6,7 @@ import io.realm.annotations.PrimaryKey
 
 open class StoriesRealm(
         @PrimaryKey
-        var id: Int = ZERO,
-        var available: Int? = ZERO,
-        var collectionURI: String? = EMPTY_STRING
+        var id: Int = DEFAULT_ID,
+        var available: Int = ZERO,
+        var collectionURI: String = EMPTY_STRING
 ) : RealmObject()

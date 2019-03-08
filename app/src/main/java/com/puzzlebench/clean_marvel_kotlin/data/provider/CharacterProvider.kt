@@ -44,8 +44,8 @@ class CharacterProvider : ContentProvider() {
                     .build()
             Realm.setDefaultConfiguration(config)
             return true
-        } catch (realmConfigError: RealmException){
-            Log.e("REALM ERROR",realmConfigError.toString())
+        } catch (realmConfigError: RealmException) {
+            Log.e("REALM ERROR", realmConfigError.toString())
             return false
         }
     }
@@ -56,11 +56,18 @@ class CharacterProvider : ContentProvider() {
                         NAME_COLUM,
                         DESCRIPTION_COLUM,
                         THUMBNAIL_PATH_COLUM,
-                        THUMBNAIL_EXTENSION_COLUM)
+                        THUMBNAIL_EXTENSION_COLUM
+                )
         )
         val characters = GetCharactersLocalImpl().getCharacters()
-        for (char in characters){
-            cursor.addRow(arrayOf(char.id,char.name,char.description,char.thumbnail?.path,char.thumbnail?.extension))
+        for (char in characters) {
+            cursor.addRow(
+                    arrayOf(char.id,
+                            char.name,
+                            char.description,
+                            char.thumbnail?.path,
+                            char.thumbnail?.extension
+                    ))
         }
         cursor.setNotificationUri(context.contentResolver, CONTENT_URI)
         return cursor

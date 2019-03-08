@@ -30,14 +30,14 @@ class CharacterMapperLocal : BaseMapperRepository<CharacterRealm, Character> {
             type.id,
             type.name,
             type.description,
-            type.thumbnail?.let { transformToThumbnailRealm(type.id,it) },
+            type.thumbnail?.let { transformToThumbnailRealm(type.id, it) },
             type.comics?.let { transformToComicsRealm(it) },
             type.series?.let { transformToSeriesRealm(it) },
             type.stories?.let { transformToStorieslRealm(it) },
             type.events?.let { transformToEventsRealm(it) }
     )
 
-    fun transformToThumbnailRealm(id: Int,thumbnail: Thumbnail): ThumbnailRealm = ThumbnailRealm(
+    fun transformToThumbnailRealm(id: Int, thumbnail: Thumbnail): ThumbnailRealm = ThumbnailRealm(
             id,
             thumbnail.path,
             thumbnail.extension
@@ -97,9 +97,7 @@ class CharacterMapperLocal : BaseMapperRepository<CharacterRealm, Character> {
             comicsRealm.collectionURI
     )
 
-    fun transformToRealmCharacterList(listCharacters: List<Character>)
-            = listCharacters.map { transformToRepository(it) }
+    fun transformToRealmCharacterList(listCharacters: List<Character>) = listCharacters.map { transformToRepository(it) }
 
-    fun transformToCharacterList(listRealmCharacters: List<CharacterRealm>)
-            = listRealmCharacters.map { transform(it) }
+    fun transformToCharacterList(listRealmCharacters: List<CharacterRealm>) = listRealmCharacters.map { transform(it) }
 }

@@ -18,11 +18,10 @@ import com.puzzlebench.clean_marvel_kotlin.presentation.mvp.view.CharacterView
 
 class ContentLoader(val context: MainActivity, val view: CharacterView) : LoaderManager.LoaderCallbacks<Cursor> {
 
-    private val upateInterface: UpdateCharacterInterface = view
+    private val updateInterface: UpdateCharacterInterface = view
 
     override fun onCreateLoader(id: Int, args: Bundle?): Loader<Cursor> {
-        val mProjection = arrayOf<String>(ID_COLUM, NAME_COLUM, DESCRIPTION_COLUM)
-        return CursorLoader(context, CONTENT_URI, null, null, null, null) as Loader<Cursor>
+        return CursorLoader(context, CONTENT_URI, null, null, null, null)
     }
 
     override fun onLoadFinished(loader: Loader<Cursor>?, data: Cursor?) {
@@ -30,8 +29,7 @@ class ContentLoader(val context: MainActivity, val view: CharacterView) : Loader
 
         data?.let {
             it.moveToFirst()
-            while (!it.isAfterLast)
-            {
+            while (!it.isAfterLast) {
                 characters.add(
                         Character(
                                 it.getInt(it.getColumnIndex(ID_COLUM)),
@@ -39,24 +37,21 @@ class ContentLoader(val context: MainActivity, val view: CharacterView) : Loader
                                 it.getString(it.getColumnIndex(DESCRIPTION_COLUM)),
                                 Thumbnail(it.getInt(it.getColumnIndex(ID_COLUM)),
                                         it.getString(it.getColumnIndex(THUMBNAIL_PATH_COLUM)),
-                                        it.getString(it.getColumnIndex(THUMBNAIL_EXTENSION_COLUM))),
-                                null,
-                                null,
-                                null,
-                                null
+                                        it.getString(it.getColumnIndex(THUMBNAIL_EXTENSION_COLUM)))
+
                         )
                 )
                 it.moveToNext()
             }
         }
-        upateInterface.updateCharacters(characters)
+        updateInterface.updateCharacters(characters)
     }
 
     override fun onLoaderReset(loader: Loader<Cursor>?) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        /*not implemented*/
     }
 
-    interface UpdateCharacterInterface{
+    interface UpdateCharacterInterface {
         fun updateCharacters(characters: List<Character>)
     }
 }

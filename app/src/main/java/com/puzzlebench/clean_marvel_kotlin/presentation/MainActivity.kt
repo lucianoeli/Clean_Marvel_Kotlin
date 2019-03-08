@@ -11,7 +11,6 @@ import com.puzzlebench.clean_marvel_kotlin.domain.usecase.SaveLocalCharactersUse
 import com.puzzlebench.clean_marvel_kotlin.presentation.base.BaseRxActivity
 import com.puzzlebench.clean_marvel_kotlin.presentation.mvp.presenter.CharacterPresenter
 import io.realm.Realm
-import io.realm.RealmConfiguration
 import com.puzzlebench.clean_marvel_kotlin.presentation.mvp.view.CharacterView
 
 open class MainActivity : BaseRxActivity() {
@@ -31,19 +30,7 @@ open class MainActivity : BaseRxActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        /*
-        Realm.init(applicationContext)
-        val config = RealmConfiguration.Builder()
-                .name("realm.character")
-                .deleteRealmIfMigrationNeeded()
-                .build()
-        realm = Realm.getInstance(config)
-        */
         presenter.init()
     }
 
-    override fun onDestroy() {
-        super.onDestroy()
-        //realm.close()
-    }
 }

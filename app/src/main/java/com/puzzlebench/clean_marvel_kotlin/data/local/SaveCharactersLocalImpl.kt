@@ -7,9 +7,8 @@ import io.realm.Realm
 class SaveCharactersLocalImpl(private val mapper: CharacterMapperLocal = CharacterMapperLocal()) {
     fun saveCharacters(characters: List<Character>) {
         val realm = Realm.getDefaultInstance()
-        val realmList = mapper.transformToRealmCharacterList(characters)
-        realm.beginTransaction()
-        realm.copyToRealmOrUpdate(realmList)
-        realm.commitTransaction()
+        realm.executeTransaction {
+            it.insertOrUpdate(mapper.transformToRealmCharacterList(characters))
+        }
     }
 }

@@ -32,7 +32,6 @@ class CharacterDetailPresenter(
                     } else {
                         view.showCharacterDetail(character)
                     }
-                    Log.d("CHARACTER",character.toString())
                     view.hideLoading()
                 }, { e ->
                     view.showToastNetworkError(e.message.toString())

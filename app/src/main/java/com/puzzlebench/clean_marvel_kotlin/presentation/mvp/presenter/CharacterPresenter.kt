@@ -25,9 +25,6 @@ class CharacterPresenter(
 
     private fun requestGetCharacters() {
         view.showLoading()
-        var charactersLocal = getCharacterLocalUseCase.invoke()
-        var names = charactersLocal.map { it.name }
-
         val subscription = getCharacterServiceUseCase
                 .invoke().subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())

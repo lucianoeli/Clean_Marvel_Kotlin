@@ -11,7 +11,5 @@ class SaveCharactersLocalImpl(private val mapper: CharacterMapperLocal = Charact
         realm.beginTransaction()
         realm.copyToRealmOrUpdate(realmList)
         realm.commitTransaction()
-
-
     }
 }

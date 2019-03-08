@@ -2,8 +2,8 @@ package com.puzzlebench.clean_marvel_kotlin.presentation.mvp.view
 
 import android.support.v7.widget.GridLayoutManager
 import android.view.View
-import android.widget.Toast
 import com.puzzlebench.clean_marvel_kotlin.R
+import com.puzzlebench.clean_marvel_kotlin.data.provider.ContentLoader
 import com.puzzlebench.clean_marvel_kotlin.domain.model.Character
 import com.puzzlebench.clean_marvel_kotlin.presentation.MainActivity
 import com.puzzlebench.clean_marvel_kotlin.presentation.adapter.CharacterAdapter
@@ -12,7 +12,7 @@ import com.puzzlebench.clean_marvel_kotlin.presentation.mvp.fragment.CharacterDe
 import kotlinx.android.synthetic.main.activity_main.*
 import java.lang.ref.WeakReference
 
-class CharacterView(activity: MainActivity) {
+class CharacterView(activity: MainActivity) : ContentLoader.UpdateCharacterInterface {
 
     val activityRef = WeakReference(activity)
     private val SPAN_COUNT = 1
@@ -23,9 +23,10 @@ class CharacterView(activity: MainActivity) {
 
     fun init() {
         val activity = activityRef.get()
-        if (activity != null) {
-            activity.recycleView.layoutManager = GridLayoutManager(activity, SPAN_COUNT)
-            activity.recycleView.adapter = adapter
+        activity?.let {
+            it.recycleView.layoutManager = GridLayoutManager(it, SPAN_COUNT)
+            it.loaderManager.initLoader(1,null, ContentLoader(it,this))
+            it.recycleView.adapter = adapter
         }
     }
 
@@ -57,4 +58,8 @@ class CharacterView(activity: MainActivity) {
         activityRef.get()?.refreshFloatingButton?.setOnClickListener(listener)
     }
 
+
+    override fun updateCharacters(characters: List<Character>) {
+       showCharacters(characters)
+    }
 }

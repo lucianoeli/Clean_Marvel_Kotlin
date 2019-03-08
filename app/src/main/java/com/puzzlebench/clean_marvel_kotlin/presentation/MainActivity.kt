@@ -31,18 +31,19 @@ open class MainActivity : BaseRxActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
+        /*
         Realm.init(applicationContext)
         val config = RealmConfiguration.Builder()
                 .name("realm.character")
                 .deleteRealmIfMigrationNeeded()
                 .build()
         realm = Realm.getInstance(config)
+        */
         presenter.init()
     }
 
     override fun onDestroy() {
         super.onDestroy()
-        realm.close()
+        //realm.close()
     }
 }

@@ -42,5 +42,4 @@ open class CharacterMapperService : BaseMapperRepository<CharacterResponse, Char
     )
 
     fun transform(charactersResponse: List<CharacterResponse>): List<Character> = charactersResponse.map { transform(it) }
-
 }

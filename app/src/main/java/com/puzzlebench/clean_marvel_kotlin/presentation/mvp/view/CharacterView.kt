@@ -10,7 +10,9 @@ import com.puzzlebench.clean_marvel_kotlin.presentation.MainActivity
 import com.puzzlebench.clean_marvel_kotlin.presentation.adapter.CharacterAdapter
 import com.puzzlebench.clean_marvel_kotlin.presentation.extension.showToast
 import com.puzzlebench.clean_marvel_kotlin.presentation.mvp.fragment.CharacterDetailFragment
-import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.activity_main.progressBar
+import kotlinx.android.synthetic.main.activity_main.recycleView
+import kotlinx.android.synthetic.main.activity_main.refreshFloatingButton
 import java.lang.ref.WeakReference
 
 class CharacterView(activity: MainActivity) : ContentLoader.UpdateCharacterInterface {

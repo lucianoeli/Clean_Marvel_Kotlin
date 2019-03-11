@@ -3,6 +3,6 @@
     <string name="message_no_items_to_show">No items to show</string>
     <string name="no_description_available">No description available</string>
     <string name="img_content_description">Image content description</string>
-    <string name="CharacterDetailDialog">CharacterDetailDialog</string>
+    <string name="title_character_detail_fragment">CharacterDetailDialog</string>
     <string name="toastMsg_data_loaded_from_local_repo">Data loaded from local repository</string>
 </resources>

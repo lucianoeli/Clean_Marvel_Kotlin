@@ -38,7 +38,6 @@ class ContentLoader(val context: MainActivity, val view: CharacterView) : Loader
                                 Thumbnail(it.getInt(it.getColumnIndex(ID_COLUM)),
                                         it.getString(it.getColumnIndex(THUMBNAIL_PATH_COLUM)),
                                         it.getString(it.getColumnIndex(THUMBNAIL_EXTENSION_COLUM)))
-
                         )
                 )
                 it.moveToNext()

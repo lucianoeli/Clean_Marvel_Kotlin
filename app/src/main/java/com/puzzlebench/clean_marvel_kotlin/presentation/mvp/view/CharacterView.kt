@@ -21,7 +21,7 @@ class CharacterView(activity: MainActivity) : ContentLoader.UpdateCharacterInter
     private val SPAN_COUNT = 1
     var adapter = CharacterAdapter { character ->
         val fragment = character.id.let { CharacterDetailFragment.newInstance(it) }
-        fragment.show(activity.supportFragmentManager, activity.getString(R.string.CharacterDetailDialog))
+        fragment.show(activity.supportFragmentManager, activity.getString(R.string.title_character_detail_fragment))
     }
 
     fun init() {
@@ -64,8 +64,8 @@ class CharacterView(activity: MainActivity) : ContentLoader.UpdateCharacterInter
 
     override fun updateCharacters(characters: List<Character>) {
         val message = activityRef.get()?.baseContext?.resources?.getString(R.string.toastMsg_data_loaded_from_local_repo)
-        message?.let { activityRef.get()?.applicationContext?.showToast(it) }
         showCharacters(characters)
+        message?.let { activityRef.get()?.applicationContext?.showToast(it) }
         hideLoading()
     }
 }

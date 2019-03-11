@@ -7,9 +7,15 @@ import android.database.Cursor
 import android.database.MatrixCursor
 import android.net.Uri
 import android.util.Log
+import com.puzzlebench.clean_marvel_kotlin.data.local.CharacterRealm
+import com.puzzlebench.clean_marvel_kotlin.data.local.EMPTY_STRING
 import com.puzzlebench.clean_marvel_kotlin.data.local.GetCharactersLocalImpl
+import com.puzzlebench.clean_marvel_kotlin.data.local.ThumbnailRealm
+import com.puzzlebench.clean_marvel_kotlin.data.mapper.CharacterMapperLocal
+import com.puzzlebench.clean_marvel_kotlin.presentation.mvp.presenter.ZERO
 import io.realm.Realm
 import io.realm.RealmConfiguration
+import io.realm.RealmModel
 import io.realm.exceptions.RealmException
 
 class CharacterProvider : ContentProvider() {
@@ -17,19 +23,18 @@ class CharacterProvider : ContentProvider() {
     companion object {
         private const val AUTHORITY = "com.puzzlebench.clean_marvel_kotlin.data.provider.CharacterProvider"
         private const val CHARACTERS_TABLE = "CharacterRealm"
-
+        private const val REALM_NAME = "realm.character"
         const val CHARACTERS = 1
         val ID_COLUM = "id"
-
         val NAME_COLUM = "name"
         val DESCRIPTION_COLUM = "description"
         val THUMBNAIL_PATH_COLUM = "path"
         val THUMBNAIL_EXTENSION_COLUM = "extension"
         val CONTENT_URI: Uri = Uri.parse("content://$AUTHORITY/$CHARACTERS_TABLE")
-
     }
 
     val sURIMatcher = UriMatcher(UriMatcher.NO_MATCH)
+    private val mapper: CharacterMapperLocal = CharacterMapperLocal()
 
     init {
         sURIMatcher.addURI(AUTHORITY, CHARACTERS_TABLE, CHARACTERS)
@@ -39,7 +44,7 @@ class CharacterProvider : ContentProvider() {
         try {
             Realm.init(context)
             val config = RealmConfiguration.Builder()
-                    .name("realm.character")
+                    .name(REALM_NAME)
                     .deleteRealmIfMigrationNeeded()
                     .build()
             Realm.setDefaultConfiguration(config)
@@ -74,18 +79,41 @@ class CharacterProvider : ContentProvider() {
     }
 
     override fun insert(uri: Uri?, values: ContentValues?): Uri {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+
+        val characterRealm = values?.let {
+            CharacterRealm(
+                    it.getAsInteger(ID_COLUM),
+                    it.getAsString(NAME_COLUM),
+                    it.getAsString(DESCRIPTION_COLUM),
+                    ThumbnailRealm(it.getAsInteger(ID_COLUM),
+                            it.getAsString(THUMBNAIL_PATH_COLUM),
+                            it.getAsString(THUMBNAIL_EXTENSION_COLUM)
+                    )
+            )
+        }
+
+        val realm = Realm.getDefaultInstance()
+        realm.executeTransaction {
+            it.insertOrUpdate(characterRealm as RealmModel)
+        }
+
+        return Uri.parse(CHARACTERS_TABLE + "/" +characterRealm?.id)
+
     }
 
     override fun update(uri: Uri?, values: ContentValues?, selection: String?, selectionArgs: Array<out String>?): Int {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        /*Do nothing*/
+        return ZERO
     }
 
     override fun delete(uri: Uri?, selection: String?, selectionArgs: Array<out String>?): Int {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        /*Do nothing*/
+        return ZERO
     }
 
     override fun getType(uri: Uri?): String {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        /*Do nothing*/
+        return EMPTY_STRING
     }
+
 }

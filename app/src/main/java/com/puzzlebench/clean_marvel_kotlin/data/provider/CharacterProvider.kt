@@ -97,23 +97,23 @@ class CharacterProvider : ContentProvider() {
             it.insertOrUpdate(characterRealm as RealmModel)
         }
 
-        return Uri.parse(CHARACTERS_TABLE + "/" +characterRealm?.id)
+        return Uri.parse("$CHARACTERS_TABLE/${characterRealm?.id}")
 
     }
 
     override fun update(uri: Uri?, values: ContentValues?, selection: String?, selectionArgs: Array<out String>?): Int {
         /*Do nothing*/
-        return ZERO
+        throw UnsupportedOperationException("Not yet implemented")
     }
 
     override fun delete(uri: Uri?, selection: String?, selectionArgs: Array<out String>?): Int {
         /*Do nothing*/
-        return ZERO
+        throw UnsupportedOperationException("Not yet implemented")
     }
 
     override fun getType(uri: Uri?): String {
         /*Do nothing*/
-        return EMPTY_STRING
+        throw UnsupportedOperationException("Not yet implemented")
     }
 
 }

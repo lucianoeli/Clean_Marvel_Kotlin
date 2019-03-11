@@ -21,12 +21,10 @@ import org.mockito.Mockito.verify
 // error: However, there was exactly 1 interaction with this mock:
 class CharacterPresenterTest {
 
-
     private var view = mock(CharacterView::class.java)
     private var characterServiceImp = mock(CharacterServicesImpl::class.java)
     private lateinit var characterPresenter: CharacterPresenter
     private lateinit var getCharacterServiceUseCase: GetCharacterServiceUseCase
-
 
     @Before
     fun setUp() {
@@ -36,7 +34,6 @@ class CharacterPresenterTest {
         getCharacterServiceUseCase = GetCharacterServiceUseCase(characterServiceImp)
         val subscriptions = mock(CompositeDisposable::class.java)
         characterPresenter = CharacterPresenter(view, getCharacterServiceUseCase, subscriptions)
-
 
     }
 
@@ -62,7 +59,6 @@ class CharacterPresenterTest {
         verify(view).hideLoading()
         verify(view).showCharacters(itemsCharecters)
 
-
     }
 
     @Test
@@ -74,8 +70,6 @@ class CharacterPresenterTest {
         verify(view).init()
         verify(characterServiceImp).getCharacters()
 
-
     }
-
 
 }

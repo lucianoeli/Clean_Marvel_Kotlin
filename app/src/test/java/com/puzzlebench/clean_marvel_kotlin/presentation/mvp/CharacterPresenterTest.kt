@@ -3,6 +3,7 @@ package com.puzzlebench.clean_marvel_kotlin.presentation.mvp
 import com.puzzlebench.clean_marvel_kotlin.data.service.CharacterServicesImpl
 import com.puzzlebench.clean_marvel_kotlin.domain.model.Character
 import com.puzzlebench.clean_marvel_kotlin.domain.usecase.GetCharacterServiceUseCase
+import com.puzzlebench.clean_marvel_kotlin.domain.usecase.SaveLocalCharactersUseCase
 import com.puzzlebench.clean_marvel_kotlin.mocks.factory.CharactersFactory
 import com.puzzlebench.clean_marvel_kotlin.presentation.mvp.presenter.CharacterPresenter
 import com.puzzlebench.clean_marvel_kotlin.presentation.mvp.view.CharacterView
@@ -25,16 +26,14 @@ class CharacterPresenterTest {
     private var characterServiceImp = mock(CharacterServicesImpl::class.java)
     private lateinit var characterPresenter: CharacterPresenter
     private lateinit var getCharacterServiceUseCase: GetCharacterServiceUseCase
+    private lateinit var saveLocalCharactersUseCase: SaveLocalCharactersUseCase
 
     @Before
     fun setUp() {
-
         RxAndroidPlugins.setInitMainThreadSchedulerHandler { scheduler -> Schedulers.trampoline() }
-
         getCharacterServiceUseCase = GetCharacterServiceUseCase(characterServiceImp)
         val subscriptions = mock(CompositeDisposable::class.java)
-        characterPresenter = CharacterPresenter(view, getCharacterServiceUseCase, subscriptions)
-
+        characterPresenter = CharacterPresenter(view, getCharacterServiceUseCase, saveLocalCharactersUseCase, subscriptions)
     }
 
     @Ignore

@@ -23,7 +23,6 @@ open class MainActivity : BaseRxActivity() {
             CharacterView(this),
             getCharacterServiceUseCase,
             saveLocalCharactersUseCase,
-            getCharacterLocalUseCase,
             subscriptions
     )
 

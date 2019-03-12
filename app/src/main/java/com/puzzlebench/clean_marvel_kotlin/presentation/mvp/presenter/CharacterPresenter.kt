@@ -14,7 +14,6 @@ class CharacterPresenter(
         view: CharacterView,
         private val getCharacterServiceUseCase: GetCharacterServiceUseCase,
         private val saveLocalCharactersUseCase: SaveLocalCharactersUseCase,
-        private val getCharacterLocalUseCase: GetCharacterLocalUseCase,
         val subscriptions: CompositeDisposable
 ) : Presenter<CharacterView>(view) {
 

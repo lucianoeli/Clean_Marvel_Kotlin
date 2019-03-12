@@ -24,7 +24,7 @@ class CharacterPresenterTest {
 
     private var view = mock(CharacterView::class.java)
     private var characterServiceImp = mock(CharacterServicesImpl::class.java)
-    private lateinit var characterPresenter: CharacterPresenter
+
     private lateinit var getCharacterServiceUseCase: GetCharacterServiceUseCase
     private lateinit var saveLocalCharactersUseCase: SaveLocalCharactersUseCase
 

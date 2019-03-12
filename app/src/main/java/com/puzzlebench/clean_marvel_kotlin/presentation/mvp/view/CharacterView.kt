@@ -2,30 +2,35 @@ package com.puzzlebench.clean_marvel_kotlin.presentation.mvp.view
 
 import android.support.v7.widget.GridLayoutManager
 import android.view.View
-import android.widget.Toast
 import com.puzzlebench.clean_marvel_kotlin.R
+import com.puzzlebench.clean_marvel_kotlin.data.provider.CharacterProvider
+import com.puzzlebench.clean_marvel_kotlin.data.provider.ContentLoader
 import com.puzzlebench.clean_marvel_kotlin.domain.model.Character
 import com.puzzlebench.clean_marvel_kotlin.presentation.MainActivity
 import com.puzzlebench.clean_marvel_kotlin.presentation.adapter.CharacterAdapter
 import com.puzzlebench.clean_marvel_kotlin.presentation.extension.showToast
 import com.puzzlebench.clean_marvel_kotlin.presentation.mvp.fragment.CharacterDetailFragment
-import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.activity_main.progressBar
+import kotlinx.android.synthetic.main.activity_main.recycleView
+import kotlinx.android.synthetic.main.activity_main.refreshFloatingButton
 import java.lang.ref.WeakReference
 
-class CharacterView(activity: MainActivity) {
+class CharacterView(activity: MainActivity) : ContentLoader.UpdateCharacterInterface {
 
     val activityRef = WeakReference(activity)
     private val SPAN_COUNT = 1
     var adapter = CharacterAdapter { character ->
         val fragment = character.id.let { CharacterDetailFragment.newInstance(it) }
-        fragment.show(activity.supportFragmentManager, "CharacterDetailDialog")
+        fragment.show(activity.supportFragmentManager, activity.getString(R.string.title_character_detail_fragment))
     }
 
     fun init() {
         val activity = activityRef.get()
-        if (activity != null) {
-            activity.recycleView.layoutManager = GridLayoutManager(activity, SPAN_COUNT)
-            activity.recycleView.adapter = adapter
+        activity?.let {
+            it.recycleView.layoutManager = GridLayoutManager(it, SPAN_COUNT)
+            showLoading()
+            it.loaderManager.initLoader(CharacterProvider.CHARACTERS, null, ContentLoader(it, this))
+            it.recycleView.adapter = adapter
         }
     }
 
@@ -53,8 +58,14 @@ class CharacterView(activity: MainActivity) {
         activityRef.get()?.progressBar?.visibility = View.VISIBLE
     }
 
-    fun getCharacters(listener: View.OnClickListener){
+    fun getCharacters(listener: View.OnClickListener) {
         activityRef.get()?.refreshFloatingButton?.setOnClickListener(listener)
     }
 
+    override fun updateCharacters(characters: List<Character>) {
+        val message = activityRef.get()?.baseContext?.resources?.getString(R.string.toastMsg_data_loaded_from_local_repo)
+        showCharacters(characters)
+        message?.let { activityRef.get()?.applicationContext?.showToast(it) }
+        hideLoading()
+    }
 }

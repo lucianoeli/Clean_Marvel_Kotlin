@@ -6,7 +6,10 @@ import com.puzzlebench.clean_marvel_kotlin.domain.model.Character
 import com.puzzlebench.clean_marvel_kotlin.presentation.extension.showToast
 import com.puzzlebench.clean_marvel_kotlin.presentation.mvp.fragment.CharacterDetailFragment
 import com.squareup.picasso.Picasso
-import kotlinx.android.synthetic.main.character_detail.*
+import kotlinx.android.synthetic.main.character_detail.description
+import kotlinx.android.synthetic.main.character_detail.imageView
+import kotlinx.android.synthetic.main.character_detail.name
+import kotlinx.android.synthetic.main.character_detail.progressBarDetailCard
 import java.lang.ref.WeakReference
 
 class CharacterDetailView(fragment: CharacterDetailFragment) {

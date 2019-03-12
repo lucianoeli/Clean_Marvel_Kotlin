@@ -5,8 +5,8 @@ import android.view.View
 import com.puzzlebench.clean_marvel_kotlin.domain.model.Character
 import com.puzzlebench.clean_marvel_kotlin.presentation.extension.getImageByUrl
 import com.puzzlebench.clean_marvel_kotlin.presentation.listener.CharacterListener
-import kotlinx.android.synthetic.main.character_cards_layout.view.*
-
+import kotlinx.android.synthetic.main.character_cards_layout.view.image_thumbnail
+import kotlinx.android.synthetic.main.character_cards_layout.view.tv_item
 
 class CharactersAdapterViewHolder(view: View, val listener: CharacterListener) : RecyclerView.ViewHolder(view) {
 

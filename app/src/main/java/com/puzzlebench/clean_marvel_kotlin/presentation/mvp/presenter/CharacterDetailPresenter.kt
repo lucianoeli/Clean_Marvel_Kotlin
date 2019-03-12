@@ -1,6 +1,5 @@
 package com.puzzlebench.clean_marvel_kotlin.presentation.mvp.presenter
 
-import android.util.Log
 import com.puzzlebench.clean_marvel_kotlin.domain.usecase.GetCharacterAditionalInfoServiceUseCase
 import com.puzzlebench.clean_marvel_kotlin.presentation.base.Presenter
 import com.puzzlebench.clean_marvel_kotlin.presentation.mvp.view.CharacterDetailView
@@ -32,7 +31,6 @@ class CharacterDetailPresenter(
                     } else {
                         view.showCharacterDetail(character)
                     }
-                    Log.d("CHARACTER",character.toString())
                     view.hideLoading()
                 }, { e ->
                     view.showToastNetworkError(e.message.toString())

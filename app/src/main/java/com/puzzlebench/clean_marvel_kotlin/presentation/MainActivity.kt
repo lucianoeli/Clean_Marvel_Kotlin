@@ -10,12 +10,12 @@ import com.puzzlebench.clean_marvel_kotlin.domain.usecase.GetCharacterServiceUse
 import com.puzzlebench.clean_marvel_kotlin.domain.usecase.SaveLocalCharactersUseCase
 import com.puzzlebench.clean_marvel_kotlin.presentation.base.BaseRxActivity
 import com.puzzlebench.clean_marvel_kotlin.presentation.mvp.presenter.CharacterPresenter
-import io.realm.Realm
-import io.realm.RealmConfiguration
 import com.puzzlebench.clean_marvel_kotlin.presentation.mvp.view.CharacterView
+import io.realm.Realm
 
 open class MainActivity : BaseRxActivity() {
 
+    lateinit var realm: Realm
     val getCharacterServiceUseCase = GetCharacterServiceUseCase(CharacterServicesImpl())
     val saveLocalCharactersUseCase = SaveLocalCharactersUseCase(SaveCharactersLocalImpl())
     val getCharacterLocalUseCase = GetCharacterLocalUseCase(GetCharactersLocalImpl())
@@ -26,23 +26,10 @@ open class MainActivity : BaseRxActivity() {
             getCharacterLocalUseCase,
             subscriptions
     )
-    lateinit var realm: Realm
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
-        Realm.init(applicationContext)
-        val config = RealmConfiguration.Builder()
-                .name("realm.character")
-                .deleteRealmIfMigrationNeeded()
-                .build()
-        realm = Realm.getInstance(config)
         presenter.init()
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-        realm.close()
     }
 }

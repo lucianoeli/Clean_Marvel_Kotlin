@@ -1,6 +1,5 @@
 package com.puzzlebench.clean_marvel_kotlin.presentation.mvp.presenter
 import android.view.View
-import android.widget.Toast
 import com.puzzlebench.clean_marvel_kotlin.domain.usecase.GetCharacterLocalUseCase
 import com.puzzlebench.clean_marvel_kotlin.domain.usecase.GetCharacterServiceUseCase
 import com.puzzlebench.clean_marvel_kotlin.domain.usecase.SaveLocalCharactersUseCase
@@ -26,9 +25,6 @@ class CharacterPresenter(
 
     private fun requestGetCharacters() {
         view.showLoading()
-        var charactersLocal = getCharacterLocalUseCase.invoke()
-        var names = charactersLocal.map { it.name }
-
         val subscription = getCharacterServiceUseCase
                 .invoke().subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())

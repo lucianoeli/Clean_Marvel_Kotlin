@@ -18,6 +18,13 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <provider android:name=".data.provider.CharacterProvider"
+            android:authorities=
+                "com.puzzlebench.clean_marvel_kotlin.data.provider.CharacterProvider"
+            android:enabled="true"
+            android:exported="true" >
+        </provider>
     </application>
 
 </manifest>

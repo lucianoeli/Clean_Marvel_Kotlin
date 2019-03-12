@@ -10,14 +10,14 @@ import io.reactivex.Observable.create
 class CharacterServicesImpl(
         private val api: MarvelResquestGenerator = MarvelResquestGenerator(),
         private val mapper: CharacterMapperService = CharacterMapperService()
-)
-{
+) {
     fun getCharacters(): Observable<List<Character>> {
         return create { subscriber ->
             val callResponse = api.createService(MarvelApi::class.java).getCharacter()
             val response = callResponse.execute()
             if (response.isSuccessful) {
-                subscriber.onNext(mapper.transform(response.body()?.data?.characters?: emptyList()))
+                subscriber.onNext(mapper.transform(response.body()?.data?.characters
+                        ?: emptyList()))
                 subscriber.onComplete()
             } else {
                 subscriber.onError(Throwable(response.message()))

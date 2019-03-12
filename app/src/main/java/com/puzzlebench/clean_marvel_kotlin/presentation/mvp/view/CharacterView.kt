@@ -4,7 +4,7 @@ import android.support.v7.widget.GridLayoutManager
 import android.view.View
 import com.puzzlebench.clean_marvel_kotlin.R
 import com.puzzlebench.clean_marvel_kotlin.data.provider.CharacterProvider
-import com.puzzlebench.clean_marvel_kotlin.data.provider.ContentLoader
+import com.puzzlebench.clean_marvel_kotlin.data.provider.CharacterLoader
 import com.puzzlebench.clean_marvel_kotlin.domain.model.Character
 import com.puzzlebench.clean_marvel_kotlin.presentation.MainActivity
 import com.puzzlebench.clean_marvel_kotlin.presentation.adapter.CharacterAdapter
@@ -15,7 +15,7 @@ import kotlinx.android.synthetic.main.activity_main.recycleView
 import kotlinx.android.synthetic.main.activity_main.refreshFloatingButton
 import java.lang.ref.WeakReference
 
-class CharacterView(activity: MainActivity) : ContentLoader.UpdateCharacterInterface {
+class CharacterView(activity: MainActivity) : CharacterLoader.UpdateCharacterInterface {
 
     val activityRef = WeakReference(activity)
     private val SPAN_COUNT = 1
@@ -29,7 +29,7 @@ class CharacterView(activity: MainActivity) : ContentLoader.UpdateCharacterInter
         activity?.let {
             it.recycleView.layoutManager = GridLayoutManager(it, SPAN_COUNT)
             showLoading()
-            it.loaderManager.initLoader(CharacterProvider.CHARACTERS, null, ContentLoader(it, this))
+            it.loaderManager.initLoader(CharacterProvider.CHARACTERS, null, CharacterLoader(it, this))
             it.recycleView.adapter = adapter
         }
     }
@@ -63,7 +63,7 @@ class CharacterView(activity: MainActivity) : ContentLoader.UpdateCharacterInter
     }
 
     override fun updateCharacters(characters: List<Character>) {
-        val message = activityRef.get()?.baseContext?.resources?.getString(R.string.toastMsg_data_loaded_from_local_repo)
+        val message = activityRef.get()?.baseContext?.resources?.getString(R.string.toast_msg_data_loaded_from_local_repo)
         showCharacters(characters)
         message?.let { activityRef.get()?.applicationContext?.showToast(it) }
         hideLoading()

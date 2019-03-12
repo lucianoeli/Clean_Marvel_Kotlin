@@ -16,7 +16,7 @@ import com.puzzlebench.clean_marvel_kotlin.domain.model.Thumbnail
 import com.puzzlebench.clean_marvel_kotlin.presentation.MainActivity
 import com.puzzlebench.clean_marvel_kotlin.presentation.mvp.view.CharacterView
 
-class ContentLoader(val context: MainActivity, val view: CharacterView) : LoaderManager.LoaderCallbacks<Cursor> {
+class CharacterLoader(val context: MainActivity, val view: CharacterView) : LoaderManager.LoaderCallbacks<Cursor> {
 
     private val updateInterface: UpdateCharacterInterface = view
 

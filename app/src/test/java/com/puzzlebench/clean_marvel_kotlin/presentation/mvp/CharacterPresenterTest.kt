@@ -1,5 +1,6 @@
 package com.puzzlebench.clean_marvel_kotlin.presentation.mvp
 
+import com.puzzlebench.clean_marvel_kotlin.R
 import com.puzzlebench.clean_marvel_kotlin.data.local.SaveCharactersLocalImpl
 import com.puzzlebench.clean_marvel_kotlin.data.service.CharacterServicesImpl
 import com.puzzlebench.clean_marvel_kotlin.domain.model.Character
@@ -13,10 +14,13 @@ import io.reactivex.android.plugins.RxAndroidPlugins
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
 import org.junit.Before
-import org.junit.Ignore
 import org.junit.Test
+import org.mockito.ArgumentMatchers
+import org.mockito.InOrder
 import org.mockito.Mock
 import org.mockito.Mockito
+import org.mockito.Mockito.any
+import org.mockito.Mockito.inOrder
 import org.mockito.Mockito.mock
 import org.mockito.Mockito.never
 import org.mockito.Mockito.verify
@@ -30,6 +34,10 @@ class CharacterPresenterTest {
     private lateinit var saveLocalCharactersUseCase: SaveLocalCharactersUseCase
     private lateinit var characterPresenter: CharacterPresenter
 
+    companion object {
+        private const val SIZE = 10
+    }
+
     @Before
     fun setUp() {
         RxAndroidPlugins.setInitMainThreadSchedulerHandler { scheduler -> Schedulers.trampoline() }
@@ -37,36 +45,37 @@ class CharacterPresenterTest {
         saveLocalCharactersUseCase = SaveLocalCharactersUseCase(saveCharactersLocalImpl)
         val subscriptions = mock(CompositeDisposable::class.java)
         characterPresenter = CharacterPresenter(view, getCharacterServiceUseCase, saveLocalCharactersUseCase, subscriptions)
+        characterPresenter.init()
     }
 
     @Test
     fun reposeWithError() {
-       // val itemsCharecters = CharactersFactory.getMockCharacter()
-        val e = Throwable("")
-        Mockito.`when`(getCharacterServiceUseCase.invoke()).thenReturn(Observable.error(e))
-        characterPresenter.init()
+        Mockito.`when`(getCharacterServiceUseCase.invoke()).thenReturn(Observable.error(Exception("")))
         characterPresenter.requestGetCharacters()
-        verify(view).init()
-        verify(view).showLoading()
-        verify(characterServiceImp).getCharacters()
-        //verify(view).hideLoading()
-        verify(view).showToastNetworkError(e.message.toString())
-
+        val order = Mockito.inOrder(view, characterServiceImp)
+        order.verify(view).init()
+        order.verify(view).showLoading()
+        order.verify(characterServiceImp).getCharacters()
+        verify(saveCharactersLocalImpl, never()).saveCharacters(ArgumentMatchers.anyCollection<Character>() as List<Character>)
+        verify(view, never()).showToast(R.string.message_no_items_to_show)
+        verify(view, never()).showToast(R.string.toast_msg_data_loaded)
+        verify(view).showToast(ArgumentMatchers.anyString())
     }
 
     @Test
     fun reposeWithItemToShow() {
-        val itemsCharecters = CharactersFactory.getMockCharacter()
+        val itemsCharecters = CharactersFactory.getMockCharacter(SIZE)
         val observable = Observable.just(itemsCharecters)
         Mockito.`when`(getCharacterServiceUseCase.invoke()).thenReturn(observable)
-        characterPresenter.init()
         characterPresenter.requestGetCharacters()
-        verify(view).init()
-        verify(view).showLoading()
-        verify(characterServiceImp).getCharacters()
-        verify(saveCharactersLocalImpl).saveCharacters(itemsCharecters)
-        verify(view).hideLoading()
-        verify(view).showCharacters(itemsCharecters)
+        val order = Mockito.inOrder(view, characterServiceImp, saveCharactersLocalImpl)
+        order.verify(view).init()
+        order.verify(view).showLoading()
+        order.verify(characterServiceImp).getCharacters()
+        order.verify(view).showCharacters(itemsCharecters)
+        order.verify(saveCharactersLocalImpl).saveCharacters(itemsCharecters)
+        order.verify(view).showToast(R.string.toast_msg_data_loaded)
+        order.verify(view).hideLoading()
     }
 
     @Test
@@ -74,14 +83,14 @@ class CharacterPresenterTest {
         val itemsCharecters = emptyList<Character>()
         val observable = Observable.just(itemsCharecters)
         Mockito.`when`(getCharacterServiceUseCase.invoke()).thenReturn(observable)
-        characterPresenter.init()
         characterPresenter.requestGetCharacters()
-        verify(view).init()
-        verify(view).showLoading()
-        verify(characterServiceImp).getCharacters()
+        val order = inOrder(view, characterServiceImp)
+        order.verify(view).init()
+        order.verify(view).showLoading()
+        order.verify(characterServiceImp).getCharacters()
+        order.verify(view).showToast(R.string.message_no_items_to_show)
+        order.verify(view).hideLoading()
         verify(saveCharactersLocalImpl, never()).saveCharacters(itemsCharecters)
-        verify(view).hideLoading()
         verify(view, never()).showCharacters(itemsCharecters)
     }
-
 }

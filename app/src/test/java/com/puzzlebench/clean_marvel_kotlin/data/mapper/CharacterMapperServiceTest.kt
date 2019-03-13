@@ -8,7 +8,7 @@ import com.puzzlebench.clean_marvel_kotlin.data.service.response.Stories
 import com.puzzlebench.clean_marvel_kotlin.data.service.response.ThumbnailResponse
 import com.puzzlebench.clean_marvel_kotlin.domain.model.Character
 import com.puzzlebench.clean_marvel_kotlin.domain.model.Thumbnail
-import junit.framework.Assert
+import org.junit.Assert.assertEquals
 import org.junit.Before
 import org.junit.Test
 import org.mockito.MockitoAnnotations
@@ -17,13 +17,16 @@ class CharacterMapperServiceTest {
 
     private lateinit var mapper: CharacterMapperService
 
-    private val ID = 12342
-    private val NAME = "sport"
-    private val DESCRIPTION = "some description"
-    private val PATH = "http:/some.com/"
-    private val EXTENSION = ".PNG"
-    private val AVAILABLE = 21
-    private val COLLECTIONURI = "URISAMPLE"
+    companion object {
+        private const val COLLECTIONURI = "URISAMPLE"
+        private const val ID = 12342
+        private const val NAME = "sport"
+        private const val DESCRIPTION = "some description"
+        private const val PATH = "http:/some.com/"
+        private const val EXTENSION = ".PNG"
+        private const val AVAILABLE = 21
+    }
+
 
     @Before
     fun setUp() {
@@ -58,19 +61,21 @@ class CharacterMapperServiceTest {
     }
 
     private fun assertBufferooDataEquality(characterResponse: CharacterResponse, character: Character) {
-        Assert.assertEquals(characterResponse.id, character.id)
-        Assert.assertEquals(characterResponse.name, character.name)
-        Assert.assertEquals(characterResponse.description, character.description)
-        Assert.assertEquals(characterResponse.thumbnail?.path, character.thumbnail?.path)
-        Assert.assertEquals(characterResponse.thumbnail?.extension, character.thumbnail?.extension)
-        Assert.assertEquals(characterResponse.comics?.available, character.comics?.available)
-        Assert.assertEquals(characterResponse.comics?.collectionURI, character.comics?.collectionURI)
-        Assert.assertEquals(characterResponse.stories?.available, character.stories?.available)
-        Assert.assertEquals(characterResponse.stories?.collectionURI, character.stories?.collectionURI)
-        Assert.assertEquals(characterResponse.events?.available, character.events?.available)
-        Assert.assertEquals(characterResponse.events?.collectionURI, character.events?.collectionURI)
-        Assert.assertEquals(characterResponse.series?.available, character.series?.available)
-        Assert.assertEquals(characterResponse.series?.collectionURI, character.series?.collectionURI)
+        assertEquals(characterResponse.id, character.id)
+        assertEquals(characterResponse.name, character.name)
+        assertEquals(characterResponse.description, character.description)
+        assertEquals(characterResponse.thumbnail?.path, character.thumbnail?.path)
+        assertEquals(characterResponse.thumbnail?.extension, character.thumbnail?.extension)
+        assertEquals(characterResponse.comics?.available, character.comics?.available)
+        assertEquals(characterResponse.comics?.collectionURI, character.comics?.collectionURI)
+        assertEquals(characterResponse.stories?.available, character.stories?.available)
+        assertEquals(characterResponse.stories?.collectionURI, character.stories?.collectionURI)
+        assertEquals(characterResponse.events?.available, character.events?.available)
+        assertEquals(characterResponse.events?.collectionURI, character.events?.collectionURI)
+        assertEquals(characterResponse.series?.available, character.series?.available)
+        assertEquals(characterResponse.series?.collectionURI, character.series?.collectionURI)
     }
+
+
 
 }

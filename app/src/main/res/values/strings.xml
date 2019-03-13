@@ -5,4 +5,5 @@
     <string name="img_content_description">Image content description</string>
     <string name="title_character_detail_fragment">CharacterDetailDialog</string>
     <string name="toast_msg_data_loaded_from_local_repo">Data loaded from local repository</string>
+    <string name="toast_msg_data_loaded">Data has been locally saved</string>
 </resources>

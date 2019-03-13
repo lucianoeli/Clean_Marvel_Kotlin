@@ -1,5 +1,6 @@
 package com.puzzlebench.clean_marvel_kotlin.presentation.mvp.view
 
+import android.support.annotation.StringRes
 import android.support.v7.widget.GridLayoutManager
 import android.view.View
 import com.puzzlebench.clean_marvel_kotlin.R
@@ -34,16 +35,16 @@ class CharacterView(activity: MainActivity) : CharacterLoader.UpdateCharacterInt
         }
     }
 
-    fun showToastNoItemToShow() {
-        val activity = activityRef.get()
-        if (activity != null) {
-            val message = activity.baseContext.resources.getString(R.string.message_no_items_to_show)
-            activity.applicationContext.showToast(message)
-        }
+    fun showToast(msg: String) {
+        activityRef.get()?.applicationContext?.showToast(msg)
     }
 
-    fun showToastNetworkError(error: String) {
-        activityRef.get()?.applicationContext?.showToast(error)
+    fun showToast(@StringRes stringId: Int) {
+        val activity = activityRef.get()
+        if (activity != null) {
+            val message = activity.baseContext.resources.getString(stringId)
+            activity.applicationContext.showToast(message)
+        }
     }
 
     fun hideLoading() {

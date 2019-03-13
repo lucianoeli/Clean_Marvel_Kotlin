@@ -14,16 +14,20 @@ class CharactersFactory {
         private const val BASE_PATH = "image"
         private const val BASE_EXTENSION = ".png"
 
-        open fun getMockCharacter(): List<Character> {
-            return listOf(1..5).map {
-                Character(
-                        BASE_ID,
-                        "$BASE_NAME$it",
-                        "$BASE_DESCRIPTION$it",
-                        Thumbnail(BASE_ID,"$BASE_PATH$it", BASE_EXTENSION),
+        fun getMockCharacter(size: Int): List<Character> {
+            val characters = mutableListOf<Character>()
+            var char: Character
+            for (i in 1..size) {
+                char = Character(
+                        i,
+                        "$BASE_NAME $i",
+                        "$BASE_DESCRIPTION$i",
+                        Thumbnail(BASE_ID, "$BASE_PATH$i", "$BASE_EXTENSION$i"),
                         Comics()
                 )
+                characters.add(char)
             }
+            return characters
         }
     }
 }

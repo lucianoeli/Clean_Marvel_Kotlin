@@ -34,6 +34,7 @@ class CharacterDetailFragment : BaseRxDialogFragment() {
         }
 
         val getCharacterAditionalInfoServiceUseCase = GetCharacterAditionalInfoServiceUseCase(CharacterServicesImpl())
+
         val presenter = CharacterDetailPresenter(
                 CharacterDetailView(this),
                 getCharacterAditionalInfoServiceUseCase,
@@ -41,6 +42,7 @@ class CharacterDetailFragment : BaseRxDialogFragment() {
                 arguments.getInt(ARG_CHARACTER_ID)
         )
         presenter.init()
+
     }
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {

@@ -1,5 +1,6 @@
 package com.puzzlebench.clean_marvel_kotlin.presentation.mvp.view
 
+import android.support.annotation.StringRes
 import android.view.View
 import com.puzzlebench.clean_marvel_kotlin.R
 import com.puzzlebench.clean_marvel_kotlin.domain.model.Character
@@ -20,16 +21,16 @@ class CharacterDetailView(fragment: CharacterDetailFragment) {
         fragment?: showLoading()
     }
 
-    fun showToastNoDetailToShow() {
+    fun showToast(@StringRes stringId: Int) {
         val fragment = fragmentRef.get()
         fragment?.let{
-            val message = fragment.activity.baseContext.resources.getString(R.string.no_description_available)
+            val message = fragment.activity.resources.getString(stringId)
             fragment.activity.applicationContext.showToast(message)
         }
     }
 
-    fun showToastNetworkError(error: String) {
-        fragmentRef.get()?.activity?.applicationContext?.showToast(error)
+    fun showToast(msg: String) {
+        fragmentRef.get()?.activity?.applicationContext?.showToast(msg)
     }
 
     fun showCharacterDetail(character: Character) {
@@ -37,7 +38,6 @@ class CharacterDetailView(fragment: CharacterDetailFragment) {
         fragment.let{
             fragment?.description?.text = character.description
             fragment?.name?.text = character.name
-
             val imageUrl = "${character.thumbnail?.path}.${character.thumbnail?.extension}"
             Picasso
                     .with(fragment?.context)

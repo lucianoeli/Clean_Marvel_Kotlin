@@ -22,7 +22,7 @@ class CharacterPresenter(
         view.getCharacters(View.OnClickListener { requestGetCharacters() })
     }
 
-    private fun requestGetCharacters() {
+    fun requestGetCharacters() {
         view.showLoading()
         val subscription = getCharacterServiceUseCase
                 .invoke().subscribeOn(Schedulers.io())

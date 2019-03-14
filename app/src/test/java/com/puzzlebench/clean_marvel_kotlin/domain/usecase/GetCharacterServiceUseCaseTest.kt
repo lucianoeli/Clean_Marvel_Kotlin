@@ -13,16 +13,20 @@ class GetCharacterServiceUseCaseTest {
 
     private lateinit var characterServiceImp: CharacterServicesImpl
 
+    companion object {
+        private const val SIZE = 10
+    }
+
     @Before
     fun setUp() {
-        val videoItems = CharactersFactory.getMockCharacter()
+        val videoItems = CharactersFactory.getMockCharacter(SIZE)
         val observable = Observable.just(videoItems)
         characterServiceImp = mock(CharacterServicesImpl::class.java)
         `when`(characterServiceImp.getCharacters()).thenReturn(observable)
-
     }
 
-    @Test operator fun invoke() {
+    @Test
+    operator fun invoke() {
         val getCharacterServiceUseCase = GetCharacterServiceUseCase(characterServiceImp)
         getCharacterServiceUseCase.invoke()
         verify(characterServiceImp).getCharacters()

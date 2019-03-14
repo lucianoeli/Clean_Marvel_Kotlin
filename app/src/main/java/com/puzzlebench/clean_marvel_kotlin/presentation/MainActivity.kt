@@ -9,6 +9,7 @@ import com.puzzlebench.clean_marvel_kotlin.domain.usecase.GetCharacterLocalUseCa
 import com.puzzlebench.clean_marvel_kotlin.domain.usecase.GetCharacterServiceUseCase
 import com.puzzlebench.clean_marvel_kotlin.domain.usecase.SaveLocalCharactersUseCase
 import com.puzzlebench.clean_marvel_kotlin.presentation.base.BaseRxActivity
+import com.puzzlebench.clean_marvel_kotlin.presentation.mvp.model.CharacterModel
 import com.puzzlebench.clean_marvel_kotlin.presentation.mvp.presenter.CharacterPresenter
 import com.puzzlebench.clean_marvel_kotlin.presentation.mvp.view.CharacterView
 import io.realm.Realm
@@ -16,13 +17,9 @@ import io.realm.Realm
 open class MainActivity : BaseRxActivity() {
 
     lateinit var realm: Realm
-    val getCharacterServiceUseCase = GetCharacterServiceUseCase(CharacterServicesImpl())
-    val saveLocalCharactersUseCase = SaveLocalCharactersUseCase(SaveCharactersLocalImpl())
-    val getCharacterLocalUseCase = GetCharacterLocalUseCase(GetCharactersLocalImpl())
     val presenter = CharacterPresenter(
             CharacterView(this),
-            getCharacterServiceUseCase,
-            saveLocalCharactersUseCase,
+            CharacterModel(GetCharacterServiceUseCase(CharacterServicesImpl()), SaveLocalCharactersUseCase(SaveCharactersLocalImpl())),
             subscriptions
     )
 

@@ -5,7 +5,7 @@ import com.puzzlebench.clean_marvel_kotlin.domain.usecase.GetCharacterServiceUse
 import com.puzzlebench.clean_marvel_kotlin.domain.usecase.SaveLocalCharactersUseCase
 import io.reactivex.Observable
 
-class CharacterModel(val characterServiceUseCase: GetCharacterServiceUseCase, val saveLocalCharactersUseCase: SaveLocalCharactersUseCase) {
-    fun getCharacterServiceUseCase(): Observable<List<Character>> = characterServiceUseCase.invoke()
-    fun saveLocalCharactersUseCase(chars: List<Character>) = saveLocalCharactersUseCase.invoke(chars)
+open class CharacterModel(val characterServiceUseCase: GetCharacterServiceUseCase, val saveLocalCharactersUseCase: SaveLocalCharactersUseCase) {
+    open fun getCharacterServiceUseCase(): Observable<List<Character>> = characterServiceUseCase.invoke()
+    open fun saveLocalCharactersUseCase(chars: List<Character>) = saveLocalCharactersUseCase.invoke(chars)
 }

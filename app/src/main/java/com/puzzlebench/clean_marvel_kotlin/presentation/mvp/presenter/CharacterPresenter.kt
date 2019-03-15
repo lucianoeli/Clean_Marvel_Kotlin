@@ -6,6 +6,7 @@ import com.puzzlebench.clean_marvel_kotlin.presentation.mvp.model.CharacterModel
 import com.puzzlebench.clean_marvel_kotlin.presentation.mvp.view.CharacterView
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
+import io.reactivex.schedulers.Schedulers
 
 class CharacterPresenter(
         view: CharacterView,
@@ -21,6 +22,7 @@ class CharacterPresenter(
     fun requestGetCharacters() {
         view.showLoading()
         val subscription = model.getCharacterServiceUseCase()
+                .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe({ characters ->
                     if (characters.isEmpty()) {
@@ -33,7 +35,7 @@ class CharacterPresenter(
                     view.hideLoading()
                 }, { e ->
                     view.hideLoading()
-                    view.showToast(e.message.toString())
+                    view.showToast(e.message.toString() + "gfg")
                 })
         subscriptions.add(subscription)
     }

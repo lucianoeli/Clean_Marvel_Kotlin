@@ -9,17 +9,22 @@ import com.puzzlebench.clean_marvel_kotlin.presentation.mvp.model.CharacterDetai
 import com.puzzlebench.clean_marvel_kotlin.presentation.mvp.presenter.CharacterDetailPresenter
 import com.puzzlebench.clean_marvel_kotlin.presentation.mvp.view.CharacterDetailView
 import io.reactivex.Observable
+import io.reactivex.Scheduler
 import io.reactivex.android.plugins.RxAndroidPlugins
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
 import org.junit.After
 import org.junit.Before
+import org.junit.BeforeClass
+import org.junit.ClassRule
 import org.junit.Ignore
 import org.junit.Test
 import org.mockito.ArgumentMatchers
+import org.mockito.ArgumentMatchers.anyInt
 import org.mockito.Mock
 import org.mockito.Mockito
 import org.mockito.Mockito.any
+import org.mockito.Mockito.doReturn
 import org.mockito.Mockito.mock
 import org.mockito.Mockito.never
 import org.mockito.Mockito.times
@@ -29,23 +34,30 @@ import org.mockito.MockitoAnnotations
 class CharacterDetailPresenterTest {
 
     companion object {
-        const val CHARACTER_ID = 12211
+        const val CHARACTER_ID = 1
         const val ONE = 1
+/*
+        @ClassRule
+        @JvmField
+        val schedulers = RxImmediateSchedulerRule()
+        */
     }
 
     private lateinit var characterDetailPresenter: CharacterDetailPresenter
     @Mock
     private lateinit var model: CharacterDetailModel
-
     @Mock
     private lateinit var view: CharacterDetailView
-    @Mock
+
     private lateinit var subscriptions: CompositeDisposable
     @Mock
     private lateinit var obs: Observable<Character>
+    @Mock private lateinit var char: Character
+
 
     @Before
     fun setUp() {
+        subscriptions = CompositeDisposable()
         RxAndroidPlugins.setInitMainThreadSchedulerHandler { scheduler -> Schedulers.trampoline() }
         MockitoAnnotations.initMocks(this)
         characterDetailPresenter = CharacterDetailPresenter(view, model, subscriptions, CHARACTER_ID)
@@ -53,21 +65,21 @@ class CharacterDetailPresenterTest {
 
     @Test
     fun requestCharacterWithInfoCharacterToShow() {
-        val character = CharactersFactory.getMockCharacter(ONE).first()
-        val observable = Observable.just(character)
-        Mockito.`when`(model.getCharacterAdditionalInfoServiceUseCase(CHARACTER_ID)).thenReturn(observable)
+        doReturn(Observable.just(char)).`when`(model).getCharacterAdditionalInfoServiceUseCase(anyInt())
+       // Mockito.`when`(model.getCharacterAdditionalInfoServiceUseCase(anyInt()))
+        //        .thenReturn(Observable.just(char))
         characterDetailPresenter.init()
-        val order = Mockito.inOrder(view, model)
-        order.verify(view).init()
-        order.verify(model).getCharacterAdditionalInfoServiceUseCase(CHARACTER_ID)
-        order.verify(view).showCharacterDetail(character)
-        order.verify(view, times(1)).hideLoading()
+        //val order = Mockito.inOrder(view, model)
+        verify(view).init()
+        verify(model).getCharacterAdditionalInfoServiceUseCase(anyInt())
+        verify(view).showCharacterDetail(char)
+        verify(view, times(1)).hideLoading()
         verify(view, never()).showToast(R.string.message_no_items_to_show)
     }
 
     @Test
     fun requestCharacterWithError() {
-        Mockito.`when`(model.getCharacterAdditionalInfoServiceUseCase(CHARACTER_ID)).thenReturn(obs)
+        doReturn(Observable.error<Character>(Throwable())).`when`(model).getCharacterAdditionalInfoServiceUseCase(anyInt())
         characterDetailPresenter.init()
         verify(view).init()
         verify(view).hideLoading()

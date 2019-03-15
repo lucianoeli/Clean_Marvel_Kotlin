@@ -1,4 +1,5 @@
 package com.puzzlebench.clean_marvel_kotlin.presentation.mvp.presenter
+import android.annotation.SuppressLint
 import android.view.View
 import com.puzzlebench.clean_marvel_kotlin.R
 import com.puzzlebench.clean_marvel_kotlin.presentation.base.Presenter
@@ -10,8 +11,7 @@ import io.reactivex.schedulers.Schedulers
 
 class CharacterPresenter(
         view: CharacterView,
-        val model: CharacterModel,
-        val subscriptions: CompositeDisposable
+        val model: CharacterModel
 ) : Presenter<CharacterView>(view) {
 
     fun init() {
@@ -19,9 +19,10 @@ class CharacterPresenter(
         view.getCharacters(View.OnClickListener { requestGetCharacters() })
     }
 
+    @SuppressLint("CheckResult")
     fun requestGetCharacters() {
         view.showLoading()
-        val subscription = model.getCharacterServiceUseCase()
+        model.getCharacterServiceUseCase()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe({ characters ->
@@ -35,8 +36,7 @@ class CharacterPresenter(
                     view.hideLoading()
                 }, { e ->
                     view.hideLoading()
-                    view.showToast(e.message.toString() + "gfg")
+                    view.showToast(e.message.toString())
                 })
-        subscriptions.add(subscription)
     }
 }

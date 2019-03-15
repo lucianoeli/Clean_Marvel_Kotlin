@@ -19,8 +19,7 @@ open class MainActivity : BaseRxActivity() {
     lateinit var realm: Realm
     val presenter = CharacterPresenter(
             CharacterView(this),
-            CharacterModel(GetCharacterServiceUseCase(CharacterServicesImpl()), SaveLocalCharactersUseCase(SaveCharactersLocalImpl())),
-            subscriptions
+            CharacterModel(GetCharacterServiceUseCase(CharacterServicesImpl()), SaveLocalCharactersUseCase(SaveCharactersLocalImpl()))
     )
 
     override fun onCreate(savedInstanceState: Bundle?) {

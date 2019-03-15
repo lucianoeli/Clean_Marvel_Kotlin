@@ -13,15 +13,15 @@ import kotlinx.android.synthetic.main.character_detail.name
 import kotlinx.android.synthetic.main.character_detail.progressBarDetailCard
 import java.lang.ref.WeakReference
 
-class CharacterDetailView(fragment: CharacterDetailFragment) {
+open class CharacterDetailView(fragment: CharacterDetailFragment) {
     private val fragmentRef = WeakReference(fragment)
 
-    fun init() {
+    open fun init() {
         val fragment = fragmentRef.get()
         fragment?: showLoading()
     }
 
-    fun showToast(@StringRes stringId: Int) {
+    open fun showToast(@StringRes stringId: Int) {
         val fragment = fragmentRef.get()
         fragment?.let{
             val message = fragment.activity.resources.getString(stringId)
@@ -29,11 +29,11 @@ class CharacterDetailView(fragment: CharacterDetailFragment) {
         }
     }
 
-    fun showToast(msg: String) {
+    open fun showToast(msg: String) {
         fragmentRef.get()?.activity?.applicationContext?.showToast(msg)
     }
 
-    fun showCharacterDetail(character: Character) {
+    open fun showCharacterDetail(character: Character) {
         val fragment = fragmentRef.get()
         fragment.let{
             fragment?.description?.text = character.description
@@ -46,11 +46,11 @@ class CharacterDetailView(fragment: CharacterDetailFragment) {
         }
     }
 
-    fun showLoading() {
+    open fun showLoading() {
         fragmentRef.get()?.progressBarDetailCard?.visibility = View.VISIBLE
     }
 
-    fun hideLoading() {
+    open fun hideLoading() {
         fragmentRef.get()?.progressBarDetailCard?.visibility = View.GONE
     }
 }

@@ -16,7 +16,7 @@ import kotlinx.android.synthetic.main.activity_main.recycleView
 import kotlinx.android.synthetic.main.activity_main.refreshFloatingButton
 import java.lang.ref.WeakReference
 
-class CharacterView(activity: MainActivity) : CharacterLoader.UpdateCharacterInterface {
+open class CharacterView(activity: MainActivity) : CharacterLoader.UpdateCharacterInterface {
 
     val activityRef = WeakReference(activity)
     private val SPAN_COUNT = 1
@@ -25,7 +25,7 @@ class CharacterView(activity: MainActivity) : CharacterLoader.UpdateCharacterInt
         fragment.show(activity.supportFragmentManager, activity.getString(R.string.title_character_detail_fragment))
     }
 
-    fun init() {
+    open fun init() {
         val activity = activityRef.get()
         activity?.let {
             it.recycleView.layoutManager = GridLayoutManager(it, SPAN_COUNT)
@@ -35,11 +35,11 @@ class CharacterView(activity: MainActivity) : CharacterLoader.UpdateCharacterInt
         }
     }
 
-    fun showToast(msg: String) {
+    open fun showToast(msg: String) {
         activityRef.get()?.applicationContext?.showToast(msg)
     }
 
-    fun showToast(@StringRes stringId: Int) {
+    open fun showToast(@StringRes stringId: Int) {
         val activity = activityRef.get()
         if (activity != null) {
             val message = activity.baseContext.resources.getString(stringId)
@@ -47,19 +47,19 @@ class CharacterView(activity: MainActivity) : CharacterLoader.UpdateCharacterInt
         }
     }
 
-    fun hideLoading() {
+    open fun hideLoading() {
         activityRef.get()?.progressBar?.visibility = View.GONE
     }
 
-    fun showCharacters(characters: List<Character>) {
+    open fun showCharacters(characters: List<Character>) {
         adapter.data = characters
     }
 
-    fun showLoading() {
+    open fun showLoading() {
         activityRef.get()?.progressBar?.visibility = View.VISIBLE
     }
 
-    fun getCharacters(listener: View.OnClickListener) {
+    open fun getCharacters(listener: View.OnClickListener) {
         activityRef.get()?.refreshFloatingButton?.setOnClickListener(listener)
     }
 

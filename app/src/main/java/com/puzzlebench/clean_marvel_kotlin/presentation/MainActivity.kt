@@ -2,10 +2,8 @@ package com.puzzlebench.clean_marvel_kotlin.presentation
 
 import android.os.Bundle
 import com.puzzlebench.clean_marvel_kotlin.R
-import com.puzzlebench.clean_marvel_kotlin.data.local.GetCharactersLocalImpl
 import com.puzzlebench.clean_marvel_kotlin.data.local.SaveCharactersLocalImpl
 import com.puzzlebench.clean_marvel_kotlin.data.service.CharacterServicesImpl
-import com.puzzlebench.clean_marvel_kotlin.domain.usecase.GetCharacterLocalUseCase
 import com.puzzlebench.clean_marvel_kotlin.domain.usecase.GetCharacterServiceUseCase
 import com.puzzlebench.clean_marvel_kotlin.domain.usecase.SaveLocalCharactersUseCase
 import com.puzzlebench.clean_marvel_kotlin.presentation.base.BaseRxActivity

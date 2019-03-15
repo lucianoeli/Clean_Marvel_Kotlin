@@ -4,7 +4,6 @@ import com.puzzlebench.clean_marvel_kotlin.data.service.response.CharacterAditio
 import com.puzzlebench.clean_marvel_kotlin.data.service.response.CharacterResponse
 import com.puzzlebench.clean_marvel_kotlin.data.service.response.DataBaseResponse
 import com.puzzlebench.clean_marvel_kotlin.data.service.response.MarvelBaseResponse
-import io.reactivex.Observable
 import retrofit2.Call
 import retrofit2.http.GET
 import retrofit2.http.Path

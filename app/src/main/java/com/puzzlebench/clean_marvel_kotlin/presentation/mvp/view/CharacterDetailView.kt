@@ -2,7 +2,6 @@ package com.puzzlebench.clean_marvel_kotlin.presentation.mvp.view
 
 import android.support.annotation.StringRes
 import android.view.View
-import com.puzzlebench.clean_marvel_kotlin.R
 import com.puzzlebench.clean_marvel_kotlin.domain.model.Character
 import com.puzzlebench.clean_marvel_kotlin.presentation.extension.showToast
 import com.puzzlebench.clean_marvel_kotlin.presentation.mvp.fragment.CharacterDetailFragment

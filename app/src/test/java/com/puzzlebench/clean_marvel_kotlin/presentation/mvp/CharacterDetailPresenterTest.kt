@@ -33,7 +33,8 @@ class CharacterDetailPresenterTest {
         const val CHARACTER_ID = 1
         const val ONE = 1
 
-        @BeforeClass @JvmStatic
+        @BeforeClass
+        @JvmStatic
         fun setUpClass() {
             val immediate = object : Scheduler() {
                 internal var noDelay = 0
@@ -54,7 +55,6 @@ class CharacterDetailPresenterTest {
             RxAndroidPlugins.setInitMainThreadSchedulerHandler { scheduler -> immediate }
         }
 
-
     }
 
     private lateinit var characterDetailPresenter: CharacterDetailPresenter
@@ -67,8 +67,8 @@ class CharacterDetailPresenterTest {
 
     @Mock
     private lateinit var obs: Observable<Character>
-    @Mock private lateinit var char: Character
-
+    @Mock
+    private lateinit var char: Character
 
     @Before
     fun setUp() {
@@ -88,7 +88,6 @@ class CharacterDetailPresenterTest {
         verify(view, never()).showCharacterDetail(com.nhaarman.mockitokotlin2.any())
     }
 
-
     @Test
     fun requestCharacterWithInfoCharacterToShow() {
         doReturn(Observable.just(char)).`when`(model).getCharacterAdditionalInfoServiceUseCase(anyInt())
@@ -100,5 +99,4 @@ class CharacterDetailPresenterTest {
         order.verify(view, times(1)).hideLoading()
         verify(view, never()).showToast(R.string.message_no_items_to_show)
     }
-
 }

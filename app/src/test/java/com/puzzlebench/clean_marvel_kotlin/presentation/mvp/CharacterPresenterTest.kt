@@ -29,8 +29,11 @@ import java.util.concurrent.TimeUnit
 
 class CharacterPresenterTest {
     private lateinit var characterPresenter: CharacterPresenter
-    @Mock private lateinit var view: CharacterView
-    @Mock private lateinit var model: CharacterModel
+    @Mock
+    private lateinit var view: CharacterView
+    @Mock
+    private lateinit var model: CharacterModel
+
     companion object {
         @BeforeClass
         @JvmStatic
@@ -53,6 +56,7 @@ class CharacterPresenterTest {
             RxJavaPlugins.setInitSingleSchedulerHandler { scheduler -> immediate }
             RxAndroidPlugins.setInitMainThreadSchedulerHandler { scheduler -> immediate }
         }
+
         private const val SIZE = 10
     }
 
@@ -103,11 +107,11 @@ class CharacterPresenterTest {
         characterPresenter.init()
         characterPresenter.requestGetCharacters()
         val order = inOrder(view, model)
-        verify(view).init()
-        verify(view).showLoading()
-        verify(model).getCharacterServiceUseCase()
-        verify(view).showToast(R.string.message_no_items_to_show)
-        verify(view).hideLoading()
+        order.verify(view).init()
+        order.verify(view).showLoading()
+        order.verify(model).getCharacterServiceUseCase()
+        order.verify(view).showToast(R.string.message_no_items_to_show)
+        order.verify(view).hideLoading()
         verify(model, never()).saveLocalCharactersUseCase(itemsCharecters)
         verify(view, never()).showCharacters(itemsCharecters)
     }

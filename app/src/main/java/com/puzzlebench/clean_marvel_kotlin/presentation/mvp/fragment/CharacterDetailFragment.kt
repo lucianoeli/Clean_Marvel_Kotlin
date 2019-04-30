@@ -8,6 +8,7 @@ import com.puzzlebench.clean_marvel_kotlin.R
 import com.puzzlebench.clean_marvel_kotlin.data.service.CharacterServicesImpl
 import com.puzzlebench.clean_marvel_kotlin.domain.usecase.GetCharacterAditionalInfoServiceUseCase
 import com.puzzlebench.clean_marvel_kotlin.presentation.base.BaseRxDialogFragment
+import com.puzzlebench.clean_marvel_kotlin.presentation.mvp.model.CharacterDetailModel
 import com.puzzlebench.clean_marvel_kotlin.presentation.mvp.presenter.CharacterDetailPresenter
 import com.puzzlebench.clean_marvel_kotlin.presentation.mvp.view.CharacterDetailView
 
@@ -33,14 +34,14 @@ class CharacterDetailFragment : BaseRxDialogFragment() {
             dialog.window.setLayout(width, height)
         }
 
-        val getCharacterAditionalInfoServiceUseCase = GetCharacterAditionalInfoServiceUseCase(CharacterServicesImpl())
         val presenter = CharacterDetailPresenter(
                 CharacterDetailView(this),
-                getCharacterAditionalInfoServiceUseCase,
+                CharacterDetailModel(GetCharacterAditionalInfoServiceUseCase(CharacterServicesImpl())),
                 subscriptions,
                 arguments.getInt(ARG_CHARACTER_ID)
         )
         presenter.init()
+
     }
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {

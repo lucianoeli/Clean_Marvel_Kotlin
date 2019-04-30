@@ -8,11 +8,9 @@ import android.database.MatrixCursor
 import android.net.Uri
 import android.util.Log
 import com.puzzlebench.clean_marvel_kotlin.data.local.CharacterRealm
-import com.puzzlebench.clean_marvel_kotlin.data.local.EMPTY_STRING
 import com.puzzlebench.clean_marvel_kotlin.data.local.GetCharactersLocalImpl
 import com.puzzlebench.clean_marvel_kotlin.data.local.ThumbnailRealm
 import com.puzzlebench.clean_marvel_kotlin.data.mapper.CharacterMapperLocal
-import com.puzzlebench.clean_marvel_kotlin.presentation.mvp.presenter.ZERO
 import io.realm.Realm
 import io.realm.RealmConfiguration
 import io.realm.RealmModel

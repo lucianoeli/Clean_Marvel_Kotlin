@@ -10,8 +10,10 @@ import retrofit2.http.Path
 
 interface MarvelApi {
     @GET("/v1/public/characters")
+    //fun getCharacter(): Observable<MarvelBaseResponse<DataBaseResponse<ArrayList<CharacterResponse>>>>
     fun getCharacter(): Call<MarvelBaseResponse<DataBaseResponse<ArrayList<CharacterResponse>>>>
 
     @GET("/v1/public/characters/{characterId}")
+    //fun getCharacterById(@Path("characterId")id: Int): Obse<MarvelBaseResponse<DataBaseResponse<ArrayList<CharacterAditionalInfoResponse>>>>
     fun getCharacterById(@Path("characterId")id: Int): Call<MarvelBaseResponse<DataBaseResponse<ArrayList<CharacterAditionalInfoResponse>>>>
 }

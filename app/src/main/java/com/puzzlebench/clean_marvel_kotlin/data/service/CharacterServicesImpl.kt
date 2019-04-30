@@ -12,12 +12,16 @@ class CharacterServicesImpl(
         private val mapper: CharacterMapperService = CharacterMapperService()
 ) {
     fun getCharacters(): Observable<List<Character>> {
+/*
+        return = api.createService(MarvelApi::class.java).getCharacter().flatMap {
+
+        }
+        */
         return create { subscriber ->
             val callResponse = api.createService(MarvelApi::class.java).getCharacter()
             val response = callResponse.execute()
             if (response.isSuccessful) {
-                subscriber.onNext(mapper.transform(response.body()?.data?.characters
-                        ?: emptyList()))
+                subscriber.onNext(mapper.transform(response.body()?.data?.characters ?: emptyList()))
                 subscriber.onComplete()
             } else {
                 subscriber.onError(Throwable(response.message()))
